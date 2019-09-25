@@ -1,8 +1,9 @@
-import React from 'react';
-import { allActions } from '../redux/store';
+import React from "react";
+import { allActions } from "../redux/store";
 
 const TestButton = () => {
   const addNumber = () => allActions.addTest();
+
   const subtractNumber = () => allActions.subtractTest();
 
   return (
