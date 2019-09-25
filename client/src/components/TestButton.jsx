@@ -1,5 +1,6 @@
 import React from "react";
 import { allActions } from "../redux/store";
+import { MDBBtn } from "mdbreact";
 
 const TestButton = () => {
   const addNumber = () => allActions.addTest();
@@ -8,12 +9,12 @@ const TestButton = () => {
 
   return (
     <>
-      <button className="add" onClick={addNumber}>
+      <MDBBtn gradient="peach" onClick={addNumber}>
         +1
-      </button>
-      <button className="subtract" onClick={subtractNumber}>
+      </MDBBtn>
+      <MDBBtn gradient="purple" onClick={subtractNumber}>
         -1
-      </button>
+      </MDBBtn>
     </>
   );
 };
