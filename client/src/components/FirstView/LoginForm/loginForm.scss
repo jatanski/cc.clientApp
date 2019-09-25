@@ -1,0 +1,13 @@
+.center {
+  margin: 10vh auto;
+}
+
+.activeLink {
+  cursor: pointer;
+  color: #007bff;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    color: #0056b3;
+    transition: all 0.2s ease-in-out;
+  }
+}
