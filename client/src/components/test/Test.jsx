@@ -1,19 +1,27 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import TestDisplay from "./TestDisplay";
 import "./test.scss";
 
-export default class Test extends Component {
-  state = {
-    numberOfparagraph: [1, 2, 3, 4]
+class Test extends Component {
+  componentDidMount = () => {};
+
+  componentDidUpdate = () => {};
+
+  displayProps = {
+    testProps: "testowy props"
   };
 
-  componentDidMount() {}
-
-  componentDidUpdate() {}
-
   render() {
-    return this.state.numberOfparagraph.map(p => {
-      return <TestDisplay></TestDisplay>;
-    });
+    return <TestDisplay {...this.displayProps}></TestDisplay>;
   }
 }
+
+const mapStateToProps = state => ({
+  testNumber: state.test.testStatus
+});
+
+export default connect(
+  mapStateToProps,
+  {}
+)(Test);
