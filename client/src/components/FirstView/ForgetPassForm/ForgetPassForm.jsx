@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import ForgetPassFormView from "./ForgetPassFormView";
 
 export default class ForgetPassForm extends Component {
-  ViewProps = {
+  viewProps = {
     changeForm: this.props.changeForm
   };
   render() {
-    return <ForgetPassFormView {...this.ViewProps}></ForgetPassFormView>;
+    return <ForgetPassFormView {...this.viewProps}></ForgetPassFormView>;
   }
 }

@@ -15,8 +15,10 @@ const LoginFormDisplay = ({
   handleInputChange,
   login,
   changeFormToRegister,
-  changeFormToForgetPass
+  changeFormToForgetPass,
+  showSpinner
 }) => {
+  console.log(showSpinner);
   return (
     <div className="firstView__loginForm">
       <MDBContainer>
@@ -25,7 +27,7 @@ const LoginFormDisplay = ({
             <MDBCard>
               <MDBCardBody>
                 <form>
-                  <p className="h4 text-center py-4">Sign In</p>
+                  <p className="h4 text-center py-4">Sign in</p>
                   <div className="grey-text">
                     <MDBInput
                       onChange={handleInputChange}
@@ -50,7 +52,15 @@ const LoginFormDisplay = ({
                     />
                   </div>
                   <div className="text-center py-4 mt-3">
-                    <MDBBtn onClick={login} color="cyan" type="submit">
+                    <MDBBtn onClick={login} color="deep-orange" type="submit">
+                      {showSpinner ? (
+                        <div
+                          className="spinner-grow spinner-grow-sm white text-success"
+                          role="status"
+                        >
+                          <span className="sr-only">Loading...</span>
+                        </div>
+                      ) : null}
                       Login
                     </MDBBtn>
                   </div>

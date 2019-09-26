@@ -32,7 +32,7 @@ const ForgetPassFormView = ({ changeForm }) => {
                   />
                 </div>
                 <div className="text-center py-4 mt-3">
-                  <MDBBtn color="cyan" type="submit">
+                  <MDBBtn color="deep-orange" type="submit">
                     Send
                   </MDBBtn>
                 </div>

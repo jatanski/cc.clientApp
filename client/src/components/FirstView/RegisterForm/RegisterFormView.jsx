@@ -10,7 +10,12 @@ import {
   MDBModalFooter
 } from "mdbreact";
 
-const RegisterFormView = ({ changeForm, handleInputChange, register }) => {
+const RegisterFormView = ({
+  changeForm,
+  handleInputChange,
+  register,
+  showSpinner
+}) => {
   return (
     <MDBContainer>
       <MDBRow>
@@ -60,7 +65,15 @@ const RegisterFormView = ({ changeForm, handleInputChange, register }) => {
                   />
                 </div>
                 <div className="text-center py-4 mt-3">
-                  <MDBBtn onClick={register} color="cyan" type="submit">
+                  <MDBBtn onClick={register} color="deep-orange" type="submit">
+                    {showSpinner ? (
+                      <div
+                        className="spinner-grow spinner-grow-sm white text-success"
+                        role="status"
+                      >
+                        <span className="sr-only">Loading...</span>
+                      </div>
+                    ) : null}
                     Register
                   </MDBBtn>
                 </div>
@@ -68,10 +81,10 @@ const RegisterFormView = ({ changeForm, handleInputChange, register }) => {
               <MDBModalFooter>
                 <div className="font-weight-light">
                   <p>
-                    You a member?
+                    Are you member?
                     <span onClick={changeForm} className="activeLink">
                       {" "}
-                      Sign Ip
+                      Sign In
                     </span>
                   </p>
                 </div>
