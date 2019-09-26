@@ -1,0 +1,13 @@
+.mainView {
+  min-height: 100vh;
+  width: 100vw;
+  background-image: url(../../assets/firstView-background.jpg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panelsDeck {
+  width: 80vw;
+  height: 100vh;
+}
