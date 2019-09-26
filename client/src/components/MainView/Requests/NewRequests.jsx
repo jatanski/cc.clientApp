@@ -7,12 +7,22 @@ class NewRequests extends Component {
   render = () => {
     return (
       <div className="card">
+        <div className="card-header">
+          <b>New client request!</b>
+        </div>
         <div className="card-body">
-          <h5 className="card-title">New client request!</h5>
-          <p className="card-text label">
-            <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-1-mini.jpg" className="rounded-circle z-depth-1-half mr-2" alt="avatar" />
-            <b>John Doe</b>
-          </p>
+          <div className="avatar-name-display">
+            <div>
+              <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-1-mini.jpg" alt="avatar" className="rounded-circle z-depth-1-half mr-2" />
+            </div>
+            <div>
+              <p className="card-text label">
+                <b>John</b><br />
+                <b>Doe</b>
+              </p>
+            </div>
+          </div>
+          <br />
           <div className="text-center">
             <div className="btn-group-vertical btn-group-sm" role="group" aria-label="Basic example">
               <button type="button" className="btn btn-outline-success waves-effect">Accept</button>

@@ -7,7 +7,20 @@
   justify-content: center;
 }
 
-.panelsDeck {
-  width: 80vw;
-  height: 100vh;
+@media (min-width: 576px) {
+  .card-deck {
+    flex-grow: 1;
+    min-width: 630px;
+    max-width: 80vw;
+  }
+}
+
+.avatar-name-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  min-width: 0%;
 }
