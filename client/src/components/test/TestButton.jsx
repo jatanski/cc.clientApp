@@ -1,5 +1,5 @@
 import React from "react";
-import { allActions } from "../redux/store";
+import { allActions } from "../../redux/store";
 import { MDBBtn } from "mdbreact";
 
 const TestButton = () => {

@@ -1,9 +1,8 @@
 import React from "react";
-import "./scss/App.scss";
-import TestView from "./views/TestView";
+import FirstView from "./views/FirstView";
 
 const App = () => {
-  return <TestView></TestView>;
+  return <FirstView></FirstView>;
 };
 
 export default App;
