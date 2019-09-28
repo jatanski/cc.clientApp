@@ -17,11 +17,11 @@ class LastPayments extends Component {
             <b>State:</b> Pending
           </p>
           <hr></hr>
-          <p className="card-text">
+          {/* <p className="card-text">
             <b>Title:</b> Removing Adds<br />
             <b>Amount:</b> 10$<br />
             <b>State:</b> Completed
-          </p>
+          </p> */}
         </div>
         <div className="card-footer text-center">
           <small className="text-muted">Last payment 2 days ago</small><br />
