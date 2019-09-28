@@ -4,6 +4,7 @@ import thunk from "redux-thunk";
 import rootReducer from "./reducers";
 import { testActions } from "./test";
 import { loginActions } from "./login";
+import { messagesActions } from './message';
 
 const store = createStore(
   rootReducer,
@@ -15,7 +16,8 @@ const allActions = bindActionCreators(
     addTest: testActions.addTest,
     subtractTest: testActions.removeTest,
     logIn: loginActions.login,
-    logOut: loginActions.logout
+    logOut: loginActions.logout,
+    setRecipient: recipient => messagesActions.setRecipient(recipient)
   },
   store.dispatch
 );
