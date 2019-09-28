@@ -16,7 +16,7 @@ const App = ({loginStatus, onFakeLogin}) => {
                 <Route path="/" exact component={FirstView} />
                 <Route path="/login" component={FirstView} />
                 <Route path="/messages" component={MessagesView} />
-                <Route path="/payment" component={FirstView} />
+                <Route path="/payment" component={Payments} />
                 <Route render={() => (<h1>Error 404 - Trzeba coś tu zrobić =]</h1>)} />
             </Switch>
         </main>

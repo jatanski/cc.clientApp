@@ -1,12 +1,13 @@
 import React from "react";
 import "./paymentsList.scss";
-import { MDBTable, MDBTableBody, MDBTableHead, MDBContainer } from 'mdbreact';
+import { MDBTable, MDBTableBody, MDBTableHead, MDBContainer, MDBCard } from 'mdbreact';
 
 const Payments = () => {
     return (
         <section className="payments">
             <MDBContainer>
-                <MDBTable>
+                <MDBCard>
+                    <MDBTable>
                 <MDBTableHead>
                     <tr>
                     <th>#</th>
@@ -36,6 +37,8 @@ const Payments = () => {
                     </tr>
                 </MDBTableBody>
             </MDBTable>
+                </MDBCard>
+                
             </MDBContainer>
         </section>
   );
