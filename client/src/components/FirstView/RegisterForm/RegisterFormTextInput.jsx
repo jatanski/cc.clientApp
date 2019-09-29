@@ -1,13 +1,7 @@
 import React from "react";
 import { MDBInput } from "mdbreact";
 
-const RegisterFormTextInput = ({
-  handleInputChange,
-  id,
-  label,
-  icon,
-  type
-}) => {
+const RegisterFormTextInput = ({ onChange, id, label, icon, type }) => {
   return (
     <MDBInput
       label={label}
@@ -17,7 +11,7 @@ const RegisterFormTextInput = ({
       validate
       error="wrong"
       success="right"
-      onChange={handleInputChange}
+      onChange={onChange}
       id={id}
     />
   );
