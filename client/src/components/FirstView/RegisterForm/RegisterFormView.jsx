@@ -9,12 +9,16 @@ import {
   MDBCardBody,
   MDBModalFooter
 } from "mdbreact";
+import RadioInput from "./RegisterFormRadioInput";
+import "./registerForm.scss";
 
 const RegisterFormView = ({
   changeForm,
   handleInputChange,
   register,
-  showSpinner
+  showSpinner,
+  isAdminTrue,
+  isAdminFalse
 }) => {
   return (
     <MDBContainer>
@@ -34,6 +38,7 @@ const RegisterFormView = ({
                     error="wrong"
                     success="right"
                     onChange={handleInputChange}
+                    id="registerFormName"
                   />
                   <MDBInput
                     label="Your email"
@@ -44,6 +49,7 @@ const RegisterFormView = ({
                     error="wrong"
                     success="right"
                     onChange={handleInputChange}
+                    id="registerFormEmail"
                   />
                   <MDBInput
                     label="Confirm your email"
@@ -54,6 +60,7 @@ const RegisterFormView = ({
                     error="wrong"
                     success="right"
                     onChange={handleInputChange}
+                    id="registerFormConfirmEmail"
                   />
                   <MDBInput
                     label="Your password"
@@ -62,8 +69,20 @@ const RegisterFormView = ({
                     type="password"
                     validate
                     onChange={handleInputChange}
+                    id="registerFormPassword"
                   />
                 </div>
+                <p>Register as?</p>
+                <RadioInput
+                  isAdmin={isAdminTrue}
+                  id="adminInput"
+                  labelText="Admin"
+                ></RadioInput>
+                <RadioInput
+                  isAdmin={isAdminFalse}
+                  id="userInput"
+                  labelText="User"
+                ></RadioInput>
                 <div className="text-center py-4 mt-3">
                   <MDBBtn onClick={register} color="deep-orange" type="submit">
                     {showSpinner ? (

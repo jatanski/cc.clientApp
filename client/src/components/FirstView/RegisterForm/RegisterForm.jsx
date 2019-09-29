@@ -5,6 +5,7 @@ import { allActions } from "../../../redux/store";
 
 class RegisterForm extends Component {
   state = {
+    isAdmin: false,
     showSpinner: false
   };
 
@@ -15,6 +16,10 @@ class RegisterForm extends Component {
     state[`${e.target.id}`] = e.target.value;
     this.setState(state);
   };
+
+  handleIsAdminFalse = () => this.setState({ isAdmin: false });
+
+  handleIsAdminTrue = () => this.setState({ isAdmin: true });
 
   register = e => {
     e.preventDefault();
@@ -54,7 +59,9 @@ class RegisterForm extends Component {
   viewProps = {
     changeForm: this.props.changeForm,
     handleInputChange: this.handleInputChange,
-    register: this.register
+    register: this.register,
+    isAdminTrue: this.handleIsAdminTrue,
+    isAdminFalse: this.handleIsAdminFalse
   };
   render = () => {
     return (
