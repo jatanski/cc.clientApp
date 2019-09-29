@@ -5,11 +5,20 @@ import { allActions } from "../../../redux/store";
 
 class RegisterForm extends Component {
   state = {
+    registerFormName: "",
+    registerFormConfirm: "",
+    registerFormConfirmEmail: "",
+    registerFormPassword: "",
+    registerFormAdminPassword: "",
     isAdmin: false,
     showSpinner: false
   };
 
   endpoint = "";
+
+  checkAdminPassword = () => {
+    return this.state.isAdmin === "CodersCrew" ? true : false;
+  };
 
   handleInputChange = e => {
     const state = {};
@@ -24,7 +33,9 @@ class RegisterForm extends Component {
   register = e => {
     e.preventDefault();
     console.log("Try register...");
+    // const correctAdminPassword = this.checkAdminPassword();
 
+    // if (correctAdminPassword)
     try {
       const registerData = {};
       this.setState({ showSpinner: true }, async () => {
@@ -67,6 +78,7 @@ class RegisterForm extends Component {
     return (
       <RegisterFormView
         showSpinner={this.state.showSpinner}
+        showAdminInput={this.state.isAdmin}
         {...this.viewProps}
       ></RegisterFormView>
     );

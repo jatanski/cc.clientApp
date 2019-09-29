@@ -11,6 +11,7 @@ import {
 } from "mdbreact";
 import RadioInput from "./RegisterFormRadioInput";
 import "./registerForm.scss";
+import TextInput from "./RegisterFormTextInput";
 
 const RegisterFormView = ({
   changeForm,
@@ -18,8 +19,40 @@ const RegisterFormView = ({
   register,
   showSpinner,
   isAdminTrue,
-  isAdminFalse
+  isAdminFalse,
+  showAdminInput
 }) => {
+  const inputs = [
+    {
+      label: "Your name",
+      icon: "user",
+      type: "text",
+      onChange: handleInputChange,
+      id: "registerFormName"
+    },
+    {
+      label: "Your mail",
+      icon: "envelope",
+      type: "email",
+      onChange: handleInputChange,
+      id: "registerFormEmail"
+    },
+    {
+      label: "Confirm your email",
+      icon: "exclamation-triangle",
+      type: "password",
+      onChange: handleInputChange,
+      id: "registerFormConfirmEmail"
+    },
+    {
+      label: "Your password",
+      icon: "lock",
+      type: "password",
+      onChange: handleInputChange,
+      id: "registerFormPassword"
+    }
+  ];
+
   return (
     <MDBContainer>
       <MDBRow>
@@ -29,60 +62,34 @@ const RegisterFormView = ({
               <form>
                 <p className="h4 text-center py-4">Sign up</p>
                 <div className="grey-text">
-                  <MDBInput
-                    label="Your name"
-                    icon="user"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleInputChange}
-                    id="registerFormName"
-                  />
-                  <MDBInput
-                    label="Your email"
-                    icon="envelope"
-                    group
-                    type="email"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleInputChange}
-                    id="registerFormEmail"
-                  />
-                  <MDBInput
-                    label="Confirm your email"
-                    icon="exclamation-triangle"
-                    group
-                    type="text"
-                    validate
-                    error="wrong"
-                    success="right"
-                    onChange={handleInputChange}
-                    id="registerFormConfirmEmail"
-                  />
-                  <MDBInput
-                    label="Your password"
-                    icon="lock"
-                    group
-                    type="password"
-                    validate
-                    onChange={handleInputChange}
-                    id="registerFormPassword"
-                  />
+                  {inputs.map(input => {
+                    return <TextInput {...input}></TextInput>;
+                  })}
                 </div>
-                <p>Register as?</p>
-                <RadioInput
-                  isAdmin={isAdminTrue}
-                  id="adminInput"
-                  labelText="Admin"
-                ></RadioInput>
-                <RadioInput
-                  isAdmin={isAdminFalse}
-                  id="userInput"
-                  labelText="User"
-                ></RadioInput>
+                <div className="firstView__registerForm--radiosInput">
+                  <p>Register as?</p>
+                  <RadioInput
+                    isAdmin={isAdminTrue}
+                    id="adminInput"
+                    labelText="Admin"
+                  ></RadioInput>
+                  {showAdminInput ? (
+                    <MDBInput
+                      label="Secret password"
+                      icon="lock"
+                      group
+                      type="password"
+                      validate
+                      onChange={handleInputChange}
+                      id="registerFormAdminPassword"
+                    />
+                  ) : null}
+                  <RadioInput
+                    isAdmin={isAdminFalse}
+                    id="userInput"
+                    labelText="User"
+                  ></RadioInput>
+                </div>
                 <div className="text-center py-4 mt-3">
                   <MDBBtn onClick={register} color="deep-orange" type="submit">
                     {showSpinner ? (
