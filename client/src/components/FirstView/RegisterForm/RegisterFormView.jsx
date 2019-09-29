@@ -20,11 +20,12 @@ const RegisterFormView = ({
   showSpinner,
   isAdminTrue,
   isAdminFalse,
-  showAdminInput
+  showAdminInput,
+  showIncorrectPassword
 }) => {
   const inputs = [
     {
-      label: "Your name",
+      label: "Your name (Lenght must have minimum 5 characters.)",
       icon: "user",
       type: "text",
       onChange: handleInputChange,
@@ -38,18 +39,18 @@ const RegisterFormView = ({
       id: "registerFormEmail"
     },
     {
-      label: "Confirm your email",
-      icon: "exclamation-triangle",
-      type: "password",
-      onChange: handleInputChange,
-      id: "registerFormConfirmEmail"
-    },
-    {
-      label: "Your password",
+      label: "Your password (Lenght must have minimum 5 characters.)",
       icon: "lock",
       type: "password",
       onChange: handleInputChange,
       id: "registerFormPassword"
+    },
+    {
+      label: "Confirm your password",
+      icon: "exclamation-triangle",
+      type: "password",
+      onChange: handleInputChange,
+      id: "registerFormConfirmPassword"
     }
   ];
 
@@ -63,8 +64,11 @@ const RegisterFormView = ({
                 <p className="h4 text-center py-4">Sign up</p>
                 <div className="grey-text">
                   {inputs.map(input => {
-                    return <TextInput {...input}></TextInput>;
+                    return <TextInput key={input.id} {...input}></TextInput>;
                   })}
+                  {showIncorrectPassword ? (
+                    <p>Password aren't indencital.</p>
+                  ) : null}
                 </div>
                 <div className="firstView__registerForm--radiosInput">
                   <p>Register as?</p>
@@ -110,7 +114,7 @@ const RegisterFormView = ({
                     Are you member?
                     <span onClick={changeForm} className="activeLink">
                       {" "}
-                      Sign In
+                      Sign in
                     </span>
                   </p>
                 </div>

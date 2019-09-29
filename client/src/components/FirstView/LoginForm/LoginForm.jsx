@@ -5,12 +5,14 @@ import { allActions } from "../../../redux/store";
 
 class LoginForm extends Component {
   state = {
+    loginFormEmail: "",
+    loginFormPassword: "",
     showSpinner: false
   };
 
-  endpoint = "";
+  endpoint = "auth";
 
-  handleEmailInputChange = e => {
+  handleInputChange = e => {
     const state = {};
     state[`${e.target.id}`] = e.target.value;
     this.setState(state);
@@ -18,11 +20,15 @@ class LoginForm extends Component {
 
   login = async e => {
     e.preventDefault();
-    console.log("Try logging...");
 
     try {
-      const loginData = {};
+      const loginData = {
+        email: this.state.loginFormEmail,
+        password: this.state.loginFormPassword
+      };
+
       this.setState({ showSpinner: true }, async () => {
+        console.log("Try logging...");
         const response = await fetch(baseModel.baseApiUrl + this.endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -34,10 +40,6 @@ class LoginForm extends Component {
 
         if (type.indexOf("text") >= 0) {
           const data = await response.text();
-
-          console.log(data);
-        } else {
-          const data = await response.json();
 
           baseModel.saveAuthToken(token);
           baseModel.save("user", data);
