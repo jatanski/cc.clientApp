@@ -18,5 +18,8 @@
     "express": "^4.17.1",
     "helmet": "^3.21.1",
     "mongoose": "^5.7.1"
+  },
+  "devDependencies": {
+    "prettier": "1.18.2"
   }
 }
