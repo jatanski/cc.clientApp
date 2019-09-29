@@ -1,3 +1,4 @@
 {
+    "jwtPrivateKey": "",
     "db": "mongodb+srv://admin:admin@gettingstarted-3ch89.gcp.mongodb.net/test?retryWrites=true&w=majority" 
 }
