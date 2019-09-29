@@ -2,7 +2,7 @@ const express = require('express');
 
 // importy routerow
 const userRouter = require('./../routes/users');
-const auth = require('./routes/auth');
+const authRouter = require('../routes/auth');
 
 // -----
 const error = require('../middleware/error');
@@ -14,7 +14,7 @@ module.exports = function(app) {
 
   //All routes
   app.use('/api/users', userRouter);
-  app.use('/api/auth', auth);
+  app.use('/api/auth', authRouter);
   // Errors handler
   app.use(error);
 };
