@@ -6,8 +6,7 @@ import {
     MDBListGroup,
     MDBListGroupItem,
     MDBCardFooter,
-    MDBBtn,
-    MDBIcon
+    MDBBtn
 } from "mdbreact";
 
 const ShowMessagesView = ({messages, onLoadMore, disableBtn}) => {
