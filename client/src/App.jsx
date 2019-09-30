@@ -5,10 +5,10 @@ import { allActions } from './redux/store';
 import Menu from './components/Menu/Menu';
 import FirstView from "./views/FirstView";
 import MessagesView from './views/MessagesView';
+import ClientPayments from './components/Payments/ClientPayments/ClientPayments';
 import AdminPanel from './views/AdminPanel';
 
 import "./scss/views/appView.scss";
-
 const App = ({loginStatus, onFakeLogin}) => {
   return (
       <BrowserRouter>
@@ -18,7 +18,7 @@ const App = ({loginStatus, onFakeLogin}) => {
                 <Route path="/" exact component={FirstView} />
                 <Route path="/login" component={FirstView} />
                 <Route path="/messages" component={MessagesView} />
-                <Route path="/payment" component={FirstView} />
+                <Route path="/payment" component={ClientPayments} />
                 <Route path="/administration" component={AdminPanel} />
                 <Route render={() => (<h1>Error 404 - Trzeba coś tu zrobić =]</h1>)} />
             </Switch>
