@@ -8,6 +8,9 @@ import Payments from "./views/Paments";
 import MessagesView from './views/MessagesView';
 import PaymentForm from './components/Payments/PaymentForm/PaymentForm'
 import ClientPayments from './components/Payments/ClientPayments/ClientPayments';
+import AdminPanel from './views/AdminPanel';
+
+import "./scss/views/appView.scss";
 const App = ({loginStatus, onFakeLogin}) => {
   return (
       <BrowserRouter>
@@ -20,6 +23,7 @@ const App = ({loginStatus, onFakeLogin}) => {
                 <Route path="/payment" component={Payments} />
                 <Route path="/addpayment" component={PaymentForm} />
                 <Route path="/myclientspayments" component={ClientPayments} />
+                <Route path="/administration" component={AdminPanel} />
                 <Route render={() => (<h1>Error 404 - Trzeba coś tu zrobić =]</h1>)} />
             </Switch>
         </main>

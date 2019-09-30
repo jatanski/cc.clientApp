@@ -18,7 +18,6 @@ const LoginFormDisplay = ({
   changeFormToForgetPass,
   showSpinner
 }) => {
-  console.log(showSpinner);
   return (
     <div className="firstView__loginForm">
       <MDBContainer>

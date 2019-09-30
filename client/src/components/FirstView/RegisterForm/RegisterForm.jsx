@@ -5,10 +5,21 @@ import { allActions } from "../../../redux/store";
 
 class RegisterForm extends Component {
   state = {
-    showSpinner: false
+    registerFormName: "",
+    registerFormEmail: "",
+    registerFormPassword: "",
+    registerFormConfirmPassword: "",
+    registerFormAdminPassword: "",
+    isAdmin: false,
+    showSpinner: false,
+    showIncorrectPassword: false
   };
 
-  endpoint = "";
+  endpoint = "users";
+
+  checkAdminPassword = () => {
+    return this.state.isAdmin === "CodersCrew" ? true : false;
+  };
 
   handleInputChange = e => {
     const state = {};
@@ -16,13 +27,28 @@ class RegisterForm extends Component {
     this.setState(state);
   };
 
-  register = e => {
-    e.preventDefault();
-    console.log("Try register...");
+  handleIsAdminFalse = () => this.setState({ isAdmin: false });
 
+  handleIsAdminTrue = () => this.setState({ isAdmin: true });
+
+  register = async e => {
+    e.preventDefault();
+
+    if (
+      this.state.registerFormPassword !== this.state.registerFormConfirmPassword
+    ) {
+      this.setState({ showIncorrectPassword: true });
+      return;
+    }
     try {
-      const registerData = {};
+      const registerData = {
+        name: this.state.registerFormName,
+        email: this.state.registerFormEmail,
+        password: this.state.registerFormPassword
+      };
+
       this.setState({ showSpinner: true }, async () => {
+        console.log("Try register...");
         const response = await fetch(baseModel.baseApiUrl + this.endpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -39,6 +65,8 @@ class RegisterForm extends Component {
         } else {
           const data = await response.json();
 
+          console.log(response);
+
           baseModel.saveAuthToken(token);
           baseModel.save("user", data);
           console.log("Logging...");
@@ -54,12 +82,16 @@ class RegisterForm extends Component {
   viewProps = {
     changeForm: this.props.changeForm,
     handleInputChange: this.handleInputChange,
-    register: this.register
+    register: this.register,
+    isAdminTrue: this.handleIsAdminTrue,
+    isAdminFalse: this.handleIsAdminFalse
   };
   render = () => {
     return (
       <RegisterFormView
         showSpinner={this.state.showSpinner}
+        showAdminInput={this.state.isAdmin}
+        showIncorrectPassword={this.state.showIncorrectPassword}
         {...this.viewProps}
       ></RegisterFormView>
     );
