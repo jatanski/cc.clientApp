@@ -1,5 +1,4 @@
 import React from "react";
-import PaymentCard from "../PaymentCard/PaymentCard"
 import { MDBTable, MDBTableBody, MDBTableHead, MDBContainer, MDBCard, MDBRow, MDBCol, MDBCardBody, MDBIcon, MDBNavLink } from 'mdbreact';
 const ClientPaymentsView = ({users}) => {
     // const renderCard = users.map(user => {
@@ -49,13 +48,11 @@ const ClientPaymentsView = ({users}) => {
                                         </tr>
                                     </MDBTableBody>
                                 </MDBTable>
-                                <MDBNavLink  to="/addpayment">
                                     <div className="text-center" >
                                         <i  className="h1" >
                                             <MDBIcon style={{ color: '#ff7043' }} onClick={() => console.log('see')} icon="plus" />
                                         </i>
                                     </div>
-                                </MDBNavLink>
                                 
                                 
                             </MDBCardBody>

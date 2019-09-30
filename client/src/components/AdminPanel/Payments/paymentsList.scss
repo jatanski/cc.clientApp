@@ -17,3 +17,12 @@
 .white {
   color: white;
 }
+
+.col {
+  display: flex;
+  justify-content: center;
+}
+.col .card {
+  min-width: 15vw;
+  min-height: 30vh;
+}

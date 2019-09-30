@@ -1,24 +1,28 @@
-import React from 'react';
-import {
-    MDBCard,
-    MDBCardHeader,
-    MDBCardBody,
-    MDBCardText
-} from "mdbreact";
+import React from "react";
+import "./paymentsList.scss";
+import PaymentCard from "./PaymentCard/PaymentCard"
+import { MDBCardHeader, MDBCard, MDBNavLink, MDBContainer, MDBIcon, MDBRow, MDBCol } from 'mdbreact';
 
-const PaymentsView = () => {
+const PaymentsView = ({users}) => {
+    const renderCard = users.map(user => {
+        return (
+            <MDBCol key={user.name}>
+                <PaymentCard  user={user}></PaymentCard>
+            </MDBCol>
+            
+        );
+    }); 
 
     return (
-        <MDBCard>
-            <MDBCardHeader>Payments</MDBCardHeader>
-                <MDBCardBody>
-                <MDBCardText>
-                    With supporting text below as a natural lead-in to additional
-                    content.
-                </MDBCardText>
-            </MDBCardBody>
-        </MDBCard>
-    )
+        <section className="payments">
+            <MDBContainer>
+                    <MDBRow>
+                        {renderCard}
+                    </MDBRow> 
+            </MDBContainer>
+        </section>
+  );
 }
+
 
 export default PaymentsView;
