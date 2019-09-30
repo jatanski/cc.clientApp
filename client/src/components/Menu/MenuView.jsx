@@ -33,6 +33,9 @@ const MenuView = ({toggleCollapse, isOpen}) => {
             <MDBNavItem>
               <MDBNavLink to="/payment">Payment</MDBNavLink>
             </MDBNavItem>
+            <MDBNavItem>
+              <MDBNavLink to="/administration">Admin</MDBNavLink>
+            </MDBNavItem>
           </MDBNavbarNav>
           <MDBNavbarNav right>
             <MDBNavItem>
