@@ -1,7 +1,10 @@
 import types from "./types";
 
 const INITIAL_STATE = {
-  loginStatus: false
+  loginStatus: false,
+  user: {
+      id: 1
+  }
 };
 
 const loginReducer = (state = INITIAL_STATE, action) => {

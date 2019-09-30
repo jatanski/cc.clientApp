@@ -1,0 +1,35 @@
+.AdminPanel {
+
+    .nav-link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .fa {
+            color: $white-transparent;
+        }
+
+        &.active .fa {
+            color: $white-transparent-active;
+        }
+
+        &:not(:last-child) {
+            border-bottom: 1px solid $white-transparent;
+        }
+    }
+
+    .user-actions {
+
+        .fa {
+            opacity: .5;
+            
+            &:not(:last-child) {
+                margin-right: .5rem;
+            }
+        }
+
+        .fa:hover {
+            opacity: 1;
+        }
+    }
+}
