@@ -10,7 +10,8 @@ class ShowMessages extends Component {
 
     loadMore = () => {
         this.setState((state, props) => {
-            return {...state,
+            return {
+                ...state,
                 recentMessages: props.messages,
                 disableBtn: true
             }

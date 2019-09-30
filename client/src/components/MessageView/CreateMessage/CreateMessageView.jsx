@@ -9,7 +9,7 @@ import {
 } from "mdbreact";
 import { connect } from 'react-redux';
 
-const CreateMessageView = ({onFormSubmit, personValue}) => {
+const CreateMessageView = ({onFormSubmit, personValue, onPersonChange, messageValue, onMessageChange}) => {
 
     return (
         <MDBCard className="mb-4">
@@ -23,16 +23,19 @@ const CreateMessageView = ({onFormSubmit, personValue}) => {
                         error="wrong"
                         success="right"
                         value={personValue}
+                        onChange={onPersonChange}
                     />
                     <MDBInput
                         label="Your message"
                         type="textarea"
                         validate
-                        error="wrong"
                         success="right"
+                        value={messageValue}
+                        error="wrong"
+                        onChange={onMessageChange}
                     />
                 </MDBCardBody>
-                <MDBCardFooter className="text-center ">
+                <MDBCardFooter className="text-center">
                     <MDBBtn 
                         color="deep-orange" 
                         type="submit"

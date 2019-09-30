@@ -6,6 +6,9 @@ import Menu from './components/Menu/Menu';
 import FirstView from "./views/FirstView";
 import Payments from "./views/Paments";
 import MessagesView from './views/MessagesView';
+import AdminPanel from './views/AdminPanel';
+
+import "./scss/views/appView.scss";
 
 const App = ({loginStatus, onFakeLogin}) => {
   return (
@@ -17,6 +20,7 @@ const App = ({loginStatus, onFakeLogin}) => {
                 <Route path="/login" component={FirstView} />
                 <Route path="/messages" component={MessagesView} />
                 <Route path="/payment" component={Payments} />
+                <Route path="/administration" component={AdminPanel} />
                 <Route render={() => (<h1>Error 404 - Trzeba coś tu zrobić =]</h1>)} />
             </Switch>
         </main>

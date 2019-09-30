@@ -4,7 +4,6 @@ import {
     MDBRow,
     MDBCol,
 } from "mdbreact";
-import "../scss/views/appView.scss";
 
 import ShowContacts from '../components/MessageView/ShowContacts/ShowContacts';
 import ShowMessages from '../components/MessageView/ShowMessages/ShowMessages';
@@ -58,11 +57,11 @@ class MessagesView extends Component {
         return (
             <MDBContainer className="Messages">
                 <MDBRow>
-                    <MDBCol sm="4">
+                    <MDBCol md="4">
                         <ShowContacts contacts={this.state.contacts} />
                         <CreateMessage />
                     </MDBCol>
-                    <MDBCol sm="8">
+                    <MDBCol md="8">
                         <ShowMessages messages={this.state.messages} />
                     </MDBCol>
                 </MDBRow>
