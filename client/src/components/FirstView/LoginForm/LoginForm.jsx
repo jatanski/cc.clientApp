@@ -41,7 +41,7 @@ class LoginForm extends Component {
         baseModel.save("user", data);
         console.log("Logging...");
         allActions.logIn();
-        // this.props.history.push("/administration");
+        this.props.history.push("/home");
       });
     } catch (error) {
       this.setState({ showSpinner: false });
