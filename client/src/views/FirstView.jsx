@@ -33,7 +33,7 @@ class FirstView extends Component {
       showRegisterForm: false,
       showForgetPassForm: true
     });
-  };
+  };               
 
   loginFormProps = {
     changeFormToRegister: this.changeFormToRegister,
