@@ -36,9 +36,7 @@ class LoginForm extends Component {
         });
 
         const token = response.headers.get("x-auth-token");
-
-        const data = await response.text();
-
+        const data = await response.json();
         baseModel.saveAuthToken(token);
         baseModel.save("user", data);
         console.log("Logging...");
