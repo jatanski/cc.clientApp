@@ -46,7 +46,6 @@ class Requests extends Component {
 
   showRequests(isAdmin, newRequest) {
     if (isAdmin && newRequest) {
-      console.log('run show')
       return <NewRequestsView { ...newRequest }{...this.requestHandlers} />;
     } else if (isAdmin && !newRequest) {
       return <NoNewRequestsView />;
@@ -59,7 +58,6 @@ class Requests extends Component {
   }
 
   render = () => {
-    console.log('from child:', this.state);
     return (
       this.showRequests(this.state.isAdmin, this.state.newRequest)
     )

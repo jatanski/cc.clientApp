@@ -68,7 +68,6 @@ class PanelsDeck extends Component {
   }
 
   render = () => {
-    console.log('from parent:', this.state.requests, this.state.isAdmin)
     return (
       <div className="card-deck mx-2 my-2 text-center">
         {this.state.newMessage ? <NewMessages {...this.state.newMessage} /> : <NoNewMessages />}
