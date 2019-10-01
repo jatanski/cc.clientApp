@@ -1,16 +1,17 @@
 import React from "react";
+import avatar from "../../../assets/avatar.png"
 import {
   MDBBtn
 } from "mdbreact";
 
 const NewMessages = ({
   title,
-  name,
-  surname,
-  avatar,
+  sender,
   date,
   textContent
 }) => {
+    sender.surname = sender.surname || 'Smith';
+    sender.avatar = sender.avatar || avatar;
     return (
       <div className="card">
         <div className="card-header">
@@ -19,12 +20,12 @@ const NewMessages = ({
         <div className="card-body">
           <div className="avatar-name-display">
             <div>
-              <img src={avatar} alt={name} className="rounded-circle z-depth-1-half mr-2" />
+              <img src={sender.avatar} alt={sender.name} className="rounded-circle z-depth-1-half mr-2" />
             </div>
             <div>
               <p className="card-text label">
-                <b>{name}</b><br />
-                <b>{surname}</b>
+                <b>{sender.name}</b><br />
+                <b>{sender.surname}</b>
               </p>
             </div>
           </div>

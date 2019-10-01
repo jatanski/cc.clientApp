@@ -86,14 +86,16 @@ router.post('/:id', auth, async (req, res) => {
         title: req.body.title,
         textContent: req.body.textContent,
         sender: {
-          email: sender.email,
+          name: sender.name,
+          surname: sender.surname,
+          avatar: sender.avatar,
           _id: sender._id
         },
         date: date
     });
 
-    receiver.messages.received.push(receivedMessage);
-    sender.messages.sent.push(sentMessage);
+    receiver.messages.received.unshift(receivedMessage);
+    sender.messages.sent.unshift(sentMessage);
 
     sender = await sender.save();
     receiver = await receiver.save();
