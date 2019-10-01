@@ -28,6 +28,20 @@ const userSchema = new mongoose.Schema({
     type: Number,
     minlength: 10,
     maxlength: 11
+  },
+  messages: {
+    sent: {
+      type: Array,
+      required: true
+    },
+    received: {
+      type: Array,
+      required: true
+    },
+    bin: {
+      type: Array,
+      required: true
+    }
   }
 });
 
