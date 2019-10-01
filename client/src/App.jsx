@@ -4,6 +4,7 @@ import { allActions } from './redux/store';
 
 import Menu from './components/Menu/Menu';
 import FirstView from "./views/FirstView";
+import MainView from "./views/MainView";
 import MessagesView from './views/MessagesView';
 import ClientPayments from './components/Payments/ClientPayments/ClientPayments';
 import AdminPanel from './views/AdminPanel';
@@ -17,6 +18,7 @@ const App = ({loginStatus, onFakeLogin}) => {
             <Switch>
                 <Route path="/" exact component={FirstView} />
                 <Route path="/login" component={FirstView} />
+                <Route path="/home" component={MainView} />
                 <Route path="/messages" component={MessagesView} />
                 <Route path="/payment" component={ClientPayments} />
                 <Route path="/administration" component={AdminPanel} />

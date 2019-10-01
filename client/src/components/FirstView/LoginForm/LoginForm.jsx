@@ -37,10 +37,11 @@ class LoginForm extends Component {
 
         const type = response.headers.get("Content-Type");
         const token = response.headers.get("x-auth-token");
+        const data = await response.json();
+        baseModel.save("user", data);
 
         if (type.indexOf("text") >= 0) {
           const data = await response.text();
-
           baseModel.saveAuthToken(token);
           baseModel.save("user", data);
           console.log("Logging...");
