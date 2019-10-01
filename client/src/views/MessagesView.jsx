@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import baseModel from '../baseModel';
+
 import {
     MDBContainer,
     MDBRow,
@@ -53,7 +55,51 @@ class MessagesView extends Component {
         ]
     }
 
+    endpoints = {
+        base: 'messages',
+        sent: 'sent',
+        received: 'received',
+        bin: 'bin'
+    }
+
+    async getMessages(type) {
+        try {
+            const response = await fetch(`${baseModel.baseApiUrl}messages/${this.endpoints[type]}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...baseModel.getAuthTokenHeaderObj()
+                }
+            });
+
+            let data;
+            if (response.headers.get("Content-Type").indexOf("text") >= 0) {
+                data = await response.text();
+            } else {
+                data = await response.json();
+            }
+
+            console.log('Fetch before setState');
+
+            this.setState({
+                messages: data
+            });
+
+            console.log('Fetch after setState');
+
+        } catch (ex) {
+            console.log('Exception:', ex)
+        }
+    }
+
+    componentDidMount() {
+        this.getMessages('sent')
+
+        console.log('componentDidMount', this.state)
+    }
+
     render() {
+        console.log('Render: ', this.state)
         return (
             <MDBContainer className="Messages">
                 <MDBRow>
