@@ -1,0 +1,55 @@
+{
+  "_id": "Object ID",
+  "account": {
+    "type": "admin",
+    "admin": null 
+  }, 
+  "name": "Test",
+  "surname": "Test",
+  "avatarImg": "adres do zdjęcia",
+  "email": "test@test.com",
+  "password": "$2b$10$0aPSqDbG4ZfSbYdhT",
+  "dateOfBirth": "dateObj",
+  "clientsRequests": [ "client1", "client2" ], 
+  "clients": ["client1", "client2"], 
+  "messages": {
+    "sent": [
+      {
+        "date" : "dateObj",
+        "receivers": ["client1", "client2"], 
+        "title": "Tytuł wiadomości",
+        "textContent": "Treść wiadomości"
+      }
+    ],
+    "received": [
+      {
+        "date" : "dateObj",
+        "sender": "userObj",
+        "title": "Tytuł wiadomości",
+        "textContent": "Treść wiadomości",
+        "isNew": true 
+      }
+    ],
+    "bin": [ ]
+  },
+  "payments": [ 
+    {
+      "dateOfInitialize": "dateObj", 
+      "amount": "positive number",
+      "state": "completed",
+      "dateOfFinalize": "dateObj"
+    }
+  ],
+  "notes": [
+    {
+      "date": "data dodania",
+      "title": "Tytuł notatki",
+      "textContent": "treść wiadomości"
+    },
+    {
+      "date": "data dodania",
+      "title": "Tytuł notatki2",
+      "textContent": "treść wiadomości2"
+    }
+  ]
+}

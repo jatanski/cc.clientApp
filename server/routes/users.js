@@ -1,6 +1,6 @@
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
-const mongoose = require("mongoose");
+const auth = require('../middleware/auth');
 const express = require("express");
 const router = express.Router();
 const { User, validate } = require("../models/user");
@@ -42,5 +42,11 @@ router.delete("/:id", auth, async (req, res) => {
   res.send('User has been deleted.');
 });
 
+router.get('/', auth, async (req, res) => {
+  let user = await User.findById(req.user._id);
+  if (!user) return res.status(404).send('The user was not found.');
+  
+  res.status(200).send(user);
+});
 
 module.exports = router;
