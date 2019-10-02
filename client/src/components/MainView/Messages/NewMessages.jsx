@@ -1,14 +1,13 @@
 import React from "react";
 import avatar from "../../../assets/avatar.png"
-import {
-  MDBBtn
-} from "mdbreact";
+import { MDBBtn } from "mdbreact";
+import { Link } from "react-router-dom";
 
 const NewMessages = ({
   title,
   sender,
   date,
-  textContent
+  textContent,
 }) => {
     sender.surname = sender.surname || 'Smith';
     sender.avatar = sender.avatar || avatar;
@@ -35,9 +34,11 @@ const NewMessages = ({
         </div>
         <div className="card-footer text-center">
           <small className="text-muted">Recieved at {date}</small><br />
-          <MDBBtn color="deep-orange" type="submit">
-              Messages
-          </MDBBtn>
+          <Link to="/messages">
+            <MDBBtn color="deep-orange" type="button">
+                Messages
+            </MDBBtn>
+          </Link>
         </div>
       </div>
     );

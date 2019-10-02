@@ -6,7 +6,7 @@ class MainView extends Component {
   render = () => {
     return (
       <section className="mainView">
-        <PanelsDeck />
+        <PanelsDeck history={ this.props.history }/>
       </section>
     );
   };

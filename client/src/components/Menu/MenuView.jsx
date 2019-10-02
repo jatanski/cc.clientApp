@@ -25,7 +25,7 @@ const MenuView = ({toggleCollapse, isOpen}) => {
         <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
           <MDBNavbarNav left>
             <MDBNavItem>
-              <MDBNavLink to="/" exact >Dashboard</MDBNavLink>
+              <MDBNavLink to="/home" exact >Dashboard</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
               <MDBNavLink to="/messages">Messages</MDBNavLink>
