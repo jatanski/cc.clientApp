@@ -26,7 +26,6 @@ const App = ({ loginStatus, onFakeLogin }) => {
           <Route render={() => <h1>Error 404 - Trzeba coś tu zrobić =</h1>} />
         </Switch>
       </main>
-      <button onClick={allActions.logIn}>FAKE LOGIN</button>
     </BrowserRouter>
   );
 };

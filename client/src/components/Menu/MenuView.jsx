@@ -15,7 +15,7 @@ import {
 } from 'mdbreact';
 import './menu.scss';
 
-const MenuView = ({toggleCollapse, isOpen}) => {
+const MenuView = ({toggleCollapse, isOpen, logOut}) => {
     return (
       <MDBNavbar color="unique-color-dark" dark expand="md">
         <MDBNavbarBrand href="/bad-route">
@@ -45,7 +45,7 @@ const MenuView = ({toggleCollapse, isOpen}) => {
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default" right>
                   <MDBDropdownItem href="#!">My Profile</MDBDropdownItem>
-                  <MDBDropdownItem href="#!">Logout</MDBDropdownItem>
+                  <MDBDropdownItem onClick={logOut} >Logout</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavItem>
