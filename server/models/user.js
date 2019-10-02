@@ -12,7 +12,6 @@ const userSchema = new mongoose.Schema({
   },
   avatar: {
     type: String,
-    required: true,
     minlength: 5,
     maxlength: 512,
     deafult: "https://osclass.calinbehtuk.ro/oc-content/themes/vrisko/images/no_user.png"
