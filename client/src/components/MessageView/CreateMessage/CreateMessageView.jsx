@@ -9,30 +9,30 @@ import {
 } from "mdbreact";
 import { connect } from 'react-redux';
 
-const CreateMessageView = ({onFormSubmit, personValue, onPersonChange, messageValue, onMessageChange}) => {
+const CreateMessageView = (props) => {
 
     return (
         <MDBCard className="mb-4">
-            <form onSubmit={onFormSubmit}>
+            <form onSubmit={props.onFormSubmit}>
                 <MDBCardHeader>Send Message</MDBCardHeader>
                 <MDBCardBody>
                     <MDBInput
-                        label="To"
+                        label="Contact or User_ID"
                         type="text"
-                        validate
-                        error="wrong"
-                        success="right"
-                        value={personValue}
-                        onChange={onPersonChange}
+                        value={props.personValue}
+                        onChange={props.onPersonChange}
+                    />
+                    <MDBInput
+                        label="Your title"
+                        type="text"
+                        value={props.titleValue}
+                        onChange={props.onTitleChange}
                     />
                     <MDBInput
                         label="Your message"
                         type="textarea"
-                        validate
-                        success="right"
-                        value={messageValue}
-                        error="wrong"
-                        onChange={onMessageChange}
+                        value={props.messageValue}
+                        onChange={props.onMessageChange}
                     />
                 </MDBCardBody>
                 <MDBCardFooter className="text-center">

@@ -1,32 +1,68 @@
 import React, { Component } from 'react';
+import baseModel from '../../../baseModel';
 import ShowMessagesView from './ShowMessagesView';
 
 class ShowMessages extends Component {
-    state = {
-        recentMessages: this.props.messages.slice(0, 5),
-        disableBtn: this.props.messages.length > 5 ? false : true,
+    constructor(props) {
+        super(props);
+        this.state = {
+            messages: [],
+            loader: false,
+            messagesType: 'sent'
+        };
     }
 
-    componentDidUpdate(props, state) {
-        // console.log(props)
-        // console.log(state)
+    endpoints = {
+        sent: 'sent',
+        received: 'received',
+        bin: 'bin'
     }
 
-    loadMore = () => {
-        this.setState((state, props) => {
-            return {
-                recentMessages: props.messages,
-                disableBtn: true
+    componentDidMount() {
+        this.getMessages('sent')
+    }
+
+    getMessages = async (type) => {
+        type = (type === 'refresh') ? this.state.messagesType : type;
+
+        try {
+            const response = await fetch(`${baseModel.baseApiUrl}messages/${this.endpoints[type]}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...baseModel.getAuthTokenHeaderObj()
+                }
+            });
+
+            let data;
+            if (response.headers.get("Content-Type").indexOf("text") >= 0) {
+                data = await response.text();
+            } else {
+                data = await response.json();
+                this.setState({
+                    messages: data,
+                    messagesType: type,
+                    loader: false,
+                });
             }
-        });
+            console.log(data)
+        } catch (ex) {
+            console.log('Exception:', ex)
+        }
+    }
+
+    loadMessagesByType = (type) => {
+        this.getMessages(type)
     }
 
     render() {
+        console.log('ShowMessages render', this.props, this.state);
         return (
             <ShowMessagesView 
-                messages={ this.state.recentMessages } 
-                onLoadMore={ this.loadMore }
-                disableBtn={ this.state.disableBtn } />
+                messages={ this.state.messages } 
+                load={ this.loadMessagesByType }
+                loader={ this.state.loader }
+                disableBtn={ true } />
         )
     }
 }
