@@ -75,7 +75,7 @@ router.post('/:id', auth, async (req, res) => {
       textContent: req.body.textContent,
       receivers: [
         {
-          email: sender.email,
+          email: receiver.email,
           _id: receiver._id
         }
       ],
