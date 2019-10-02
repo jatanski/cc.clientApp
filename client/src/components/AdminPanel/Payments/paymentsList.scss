@@ -19,10 +19,11 @@
 }
 
 .col {
+  min-width: 40%;
   display: flex;
   justify-content: center;
 }
 .col .card {
-  min-width: 15vw;
+  min-width: 100%;
   min-height: 30vh;
 }
