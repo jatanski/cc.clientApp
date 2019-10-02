@@ -19,7 +19,7 @@ const ShowMessagesView = ({messages, load }) => {
                 key={message._id} 
                 hover >
                     <div className="d-flex w-100 justify-content-between">
-                        <h5 className="mb-1"> { message.title } - <small>{ message.receivers[0].email } </small></h5>
+                        <h5 className="mb-1"> { message.title } - <small>{ message.receivers ? message.receivers[0].email : null } </small></h5>
                         <small>{ timeDays === 0 ? 'today' : timeDays + ' day ago'}</small>
                     </div>
                     <p className="mb-1">{ message.textContent }</p>

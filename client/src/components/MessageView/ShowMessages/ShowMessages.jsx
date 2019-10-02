@@ -19,7 +19,7 @@ class ShowMessages extends Component {
     }
 
     componentDidMount() {
-        this.getMessages('sent')
+        this.getMessages('received')
     }
 
     getMessages = async (type) => {
