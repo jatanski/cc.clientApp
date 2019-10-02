@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import ShowMessagesView from './ShowMessagesView';
 
 class ShowMessages extends Component {
@@ -8,10 +7,14 @@ class ShowMessages extends Component {
         disableBtn: this.props.messages.length > 5 ? false : true,
     }
 
+    componentDidUpdate(props, state) {
+        // console.log(props)
+        // console.log(state)
+    }
+
     loadMore = () => {
         this.setState((state, props) => {
             return {
-                ...state,
                 recentMessages: props.messages,
                 disableBtn: true
             }

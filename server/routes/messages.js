@@ -61,15 +61,8 @@ router.post('/:id', auth, async (req, res) => {
     let sender = await User.findById(req.user._id);
     if (!sender) return res.status(404).send('The sender with the given ID was not found.');
 
-    let date = new Date;
-    date = date.toLocaleString(undefined, {
-        day: 'numeric',
-        month: 'numeric',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-    })
-  
+    const date = Date.now();
+    
     const sentMessage = new SentMessage({ 
       title: req.body.title,
       textContent: req.body.textContent,
