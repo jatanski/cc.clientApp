@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import {
-  MDBBtn
-} from "mdbreact";
+import { MDBBtn } from "mdbreact";
+import { Link } from "react-router-dom";
 
 class LastPayments extends Component {
   render = () => {
@@ -25,9 +24,11 @@ class LastPayments extends Component {
         </div>
         <div className="card-footer text-center">
           <small className="text-muted">Last payment 2 days ago</small><br />
-          <MDBBtn color="deep-orange" type="submit">          
-            Payments
-          </MDBBtn>
+          <Link to="/payment">
+            <MDBBtn color="deep-orange" type="button">          
+              Payments
+            </MDBBtn>
+          </Link>
         </div>
       </div>
     );

@@ -12,58 +12,66 @@ class PanelsDeck extends Component {
   constructor () {
     super();
     this.state = ({
-      user: '',
       newMessage: '',
       isAdmin: '',
       requests: '',
       lastPayments: '',
     });
-    
   };
 
   componentDidMount = () => {
     this.init();
   }
 
-  findNewMessage = (receivedMessages) => {
-    return receivedMessages.find((msg) => msg.new === true);
-  }
-
   findPayments = (payments) => {
     // sprawdz czy user ma jakieś platnosci w tablicy, jeśli ma zwróć 2 lub 1 ostatnio dodane jeśli nie zwroc false
     // przypisz zwróconą wartość do this.state.payments
   }
-
-  findClientRequests = (clientsRequests) => {
-    // jesli tablica clientRequests coś zawiera zwróć pierwszy obiekt, jeśli pusta zwróć false
-    // przypisz zwróconą wartość do this.state.newRequest
-    return clientsRequests;
-  }
   
   init = async () => {
-    const user = await baseModel.load("user");
 
+      const token = baseModel.getAuthTokenHeaderObj()
+      const response = await fetch(baseModel.baseApiUrl + "users/", {
+        method: "GET",
+        headers: { 
+          "Content-Type": "application/json",
+          "x-auth-token": token["x-auth-token"]
+        },
+      });
+      const user = await response.json();
+      console.log(user)
+
+    let date = new Date;
+    date = date.toLocaleString(undefined, {
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+      
     // const payment = this.findPayments(this.state.user.payments);
-    const msg = this.findNewMessage(user.messages.received);
+    const msg = user.messages.received.find((msg) => msg.new === true);
     const requests = [
         {
           name: "Joe",
           surname: "Doe",
-          avatar: "https://mdbootstrap.com/img/Photos/Avatars/avatar-1-mini.jpg"
+          avatar: "https://mdbootstrap.com/img/Photos/Avatars/avatar-1-mini.jpg",
+          date: date
         },
         {
           name: "Kate",
           surname: "Smith",
-          avatar: "https://d15gqlu8dfiqiu.cloudfront.net/s3fs-public/styles/avatar/public/twitter_avatars/32258_pN4g7qfg.jpg"
+          avatar: "https://d15gqlu8dfiqiu.cloudfront.net/s3fs-public/styles/avatar/public/twitter_avatars/32258_pN4g7qfg.jpg",
+          date: date
         }
       ];
     
-
     this.setState({
       // lastPayment: payment,
       requests: requests,
       newMessage: msg,
-      isAdmin: true // user.isAdmin
+      isAdmin: true, // user.isAdmin
     });
   }
 

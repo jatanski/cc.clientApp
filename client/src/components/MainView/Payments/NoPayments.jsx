@@ -1,7 +1,6 @@
 import React from "react";
-import {
-  MDBBtn
-} from "mdbreact";
+import { MDBBtn } from "mdbreact";
+import { Link } from "react-router-dom";
 
 const NoPayments = () => {
   return (
@@ -13,9 +12,11 @@ const NoPayments = () => {
         <i className="far fa-credit-card fa-8x deep-orange-text"></i>
       </div>
       <div className="card-footer text-center">
-        <MDBBtn color="deep-orange" type="submit">          
-          Payments
-        </MDBBtn>
+        <Link to="/payment">
+          <MDBBtn color="deep-orange" type="button">          
+            Payments
+          </MDBBtn>
+        </Link>
       </div>
     </div>
   );
