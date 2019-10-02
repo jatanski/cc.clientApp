@@ -14,6 +14,7 @@ import {
   MDBIcon
 } from 'mdbreact';
 import './menu.scss';
+import { Link } from "react-router-dom";
 
 const MenuView = ({toggleCollapse, isOpen, logOut}) => {
     return (
@@ -44,7 +45,9 @@ const MenuView = ({toggleCollapse, isOpen, logOut}) => {
                   <MDBIcon icon="user" />
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default" right>
-                  <MDBDropdownItem href="#!">My Profile</MDBDropdownItem>
+                  <Link to ="/profile">
+                      <MDBDropdownItem >My Profile</MDBDropdownItem>
+                  </Link>
                   <MDBDropdownItem onClick={logOut} >Logout</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
