@@ -63,6 +63,24 @@ router.post('/balance/:id', auth, async (req, res) => {
   res.status(200).send('Added cash to account. Current balance: ' + user.balance);
 });
 
+router.get('/deadline/:id', auth, async (req, res) => {
+  let user = await User.findById(req.params.id);
+  if (!user) return res.status(404).send('The user was not found.');
+
+  const lastPayment = parseInt(user.payments[0].date);
+
+  const daysLeft = (lastPayment + 86400000 * 30 - new Date().getTime()) / 86400000;
+  const hoursLeft = daysLeft * 24;
+  const minutesLeft = hoursLeft * 60;
+  const dateLeftObject = {
+    days: Math.floor(daysLeft),
+    hours: Math.floor(hoursLeft),
+    minutes: Math.floor(minutesLeft)
+  };
+
+  res.status(200).send(dateLeftObject);
+});
+
 function validateBalance(balance) {
   const schema = {
     balance: Joi.number()
