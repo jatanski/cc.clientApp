@@ -7,9 +7,11 @@ import {
     MDBListGroupItem,
     MDBCardFooter,
     MDBBtn,
+    MDBIcon,
+    MDBBadge
 } from "mdbreact";
 
-const ShowMessagesView = ({messages, load }) => {
+const ShowMessagesView = ({messages, load, onDelete, onRead}) => {
 
     const messagesJSXArr = messages.reverse().map(message => {
         const timeDiff = Date.now() - message.date;
@@ -18,9 +20,17 @@ const ShowMessagesView = ({messages, load }) => {
             <MDBListGroupItem 
                 key={message._id} 
                 hover >
-                    <div className="d-flex w-100 justify-content-between">
-                        <h5 className="mb-1"> { message.title } - <small>{ message.receivers ? message.receivers[0].email : null } </small></h5>
-                        <small>{ timeDays === 0 ? 'today' : timeDays + ' day ago'}</small>
+                    <div className="d-flex justify-content-between align-items-center">
+                        <p className="mb-1"> 
+                        { message.new ? (<MDBBadge onClick={() => onRead(message._id)} pill color="primary" className="mr-2">NEW</MDBBadge>) : null }
+                        <strong>{ message.title }</strong> - 
+                            { message.receivers ? (<small> to: {message.receivers[0].email} </small> ) : null }
+                            { message.sender ? (<small> from: { message.sender.email ? message.sender.email : message.sender.name } </small> ) : null }
+                        </p>
+                        <small>
+                            { timeDays === 0 ? 'today' : timeDays + ' day ago'}
+                            <MDBIcon onClick={() => onDelete(message._id)} icon="trash" className="indigo-text pl-3" />
+                        </small>
                     </div>
                     <p className="mb-1">{ message.textContent }</p>
             </MDBListGroupItem>)

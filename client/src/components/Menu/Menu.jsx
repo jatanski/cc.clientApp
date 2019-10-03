@@ -10,6 +10,13 @@ class Menu extends React.Component {
         isOpen: false
     }
 
+    componentDidMount() {
+        if( baseModel.isUserLoggedIn() ) {
+            allActions.logIn();
+            allActions.setUser(baseModel.getUserFromLocal())
+        }
+    }
+
     toggleCollapse = () => {
         this.setState({ isOpen: !this.state.isOpen });
     }
@@ -30,6 +37,7 @@ class Menu extends React.Component {
             <>
             { this.props.loginStatus ? (
                 <MenuView
+                    user={this.props.user}
                     logOut={this.logOut}
                     isOpen={this.state.isOpen}
                     {...this.menuProps}>
@@ -42,7 +50,8 @@ class Menu extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        loginStatus: state.login.loginStatus
+        loginStatus: state.login.loginStatus,
+        user: state.login.user
     }
 }
 
