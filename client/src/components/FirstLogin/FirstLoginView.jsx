@@ -47,7 +47,7 @@ const FristLoginView = () => {
                 position: 'System Architect',
                 salary: '$320',
                 age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Pay for Subscription
+                Buy subscription
             </button>
             },
             {
@@ -55,7 +55,7 @@ const FristLoginView = () => {
                 position: 'Accountant',
                 salary: '$170',
                 age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Pay for Subscription
+                Buy subscription
             </button>
                 
             },
@@ -64,7 +64,7 @@ const FristLoginView = () => {
                 position: 'Junior Technical Author',
                 salary: '$86',
                 age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Pay for Subscription
+                Buy subscription
             </button>
                 
             },
@@ -73,7 +73,7 @@ const FristLoginView = () => {
                 position: 'Senior Javascript Developer',
                 salary: '$433',
                 age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Pay for Subscription
+                Buy subscription
             </button>
             },
             {
@@ -81,7 +81,7 @@ const FristLoginView = () => {
                 position: 'Accountant',
                 salary: '$162',
                 age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Pay for Subscription
+                Buy subscription
             </button>
                 
             },
@@ -90,7 +90,7 @@ const FristLoginView = () => {
                 position: 'Integration Specialist',
                 salary: '$372',
                 age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Pay for Subscription
+                Buy subscription
             </button>
                 
             },
@@ -99,7 +99,7 @@ const FristLoginView = () => {
                 position: 'Sales Assistant',
                 salary: '$137',
                 age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Pay for Subscription
+                Buy subscription
             </button>
                 
             },
@@ -108,7 +108,7 @@ const FristLoginView = () => {
                 position: 'Integration Specialist',
                 salary: '$327',
                 age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Pay for Subscription
+                Buy subscription
             </button>
                 
             },
@@ -116,8 +116,8 @@ const FristLoginView = () => {
                 name: 'Colleen Hurst',
                 position: 'Javascript Developer',
                 salary: '$205',
-                age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Pay for Subscription
+                age: <button onClick={() => console.log('ess')} className="btn btn-outline-success waves-effect">
+                Buy subscription
             </button>
                 
             }

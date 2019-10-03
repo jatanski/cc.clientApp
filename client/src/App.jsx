@@ -16,11 +16,11 @@ const App = ({ loginStatus, onFakeLogin }) => {
       <Menu />
       <main className="MainContent">
         <Switch>
-          <Route path="/" exact component={FirstLogin} />
+          <Route path="/" exact component={FirstView} />
           <Route path="/login" component={FirstView} />
           <Route path="/home" component={MainView} />
           <Route path="/messages" component={MessagesView} />
-          <Route path="/payment" component={ClientPayments} />
+          <Route path="/payment" component={FirstLogin} />
           <Route path="/administration" component={AdminPanel} />
           <Route render={() => <h1>Error 404 - Trzeba coś tu zrobić =</h1>} />
         </Switch>
