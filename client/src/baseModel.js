@@ -23,6 +23,10 @@ class BaseModel {
     );
   }
 
+  static getUserFromLocal() {
+    return JSON.parse(localStorage.getItem("user"))
+  }
+
   static getAuthToken() {
     return localStorage.getItem("reactAppToken");
   }
