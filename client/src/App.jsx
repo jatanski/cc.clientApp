@@ -9,7 +9,9 @@ import MainView from "./views/MainView";
 import MessagesView from "./views/MessagesView";
 import ClientPayments from "./components/Payments/ClientPayments/ClientPayments";
 import AdminPanel from "./views/AdminPanel";
+import ProfilePage from "./components/Profile/ProfilePage/ProfilePage";
 import "./scss/views/appView.scss";
+
 const App = ({ loginStatus, onFakeLogin }) => {
   return (
     <BrowserRouter>
@@ -22,6 +24,7 @@ const App = ({ loginStatus, onFakeLogin }) => {
           <Route path="/messages" component={MessagesView} />
           <Route path="/payment" component={FirstLogin} />
           <Route path="/administration" component={AdminPanel} />
+          <Route path="/profile" component={ProfilePage} />
           <Route render={() => <h1>Error 404 - Trzeba coś tu zrobić =</h1>} />
         </Switch>
       </main>

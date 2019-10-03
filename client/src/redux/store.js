@@ -17,7 +17,8 @@ const allActions = bindActionCreators(
     subtractTest: testActions.removeTest,
     logIn: loginActions.login,
     logOut: loginActions.logout,
-    setRecipient: recipient => messagesActions.setRecipient(recipient)
+    setUser: user => loginActions.setUser(user),
+    setRecipient: recipient => messagesActions.setRecipient(recipient),
   },
   store.dispatch
 );

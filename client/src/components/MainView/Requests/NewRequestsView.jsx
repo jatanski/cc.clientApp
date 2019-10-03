@@ -1,7 +1,4 @@
 import React from "react";
-import {
-  MDBBtn
-} from "mdbreact";
 
 const NewRequests = ({
   name,
@@ -50,9 +47,6 @@ const NewRequests = ({
       </div>
       <div className="card-footer text-center">
         <small className="text-muted">Recieved at {date}</small><br />
-          <MDBBtn color="deep-orange" type="submit">          
-            Requests
-          </MDBBtn>
       </div>
     </div>
   );

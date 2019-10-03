@@ -39,7 +39,6 @@ class PanelsDeck extends Component {
         },
       });
       const user = await response.json();
-      console.log(user)
 
     let date = new Date;
     date = date.toLocaleString(undefined, {

@@ -14,8 +14,9 @@ import {
   MDBIcon
 } from 'mdbreact';
 import './menu.scss';
+import { Link } from "react-router-dom";
 
-const MenuView = ({toggleCollapse, isOpen, logOut}) => {
+const MenuView = ({toggleCollapse, isOpen, logOut, user}) => {
     return (
       <MDBNavbar color="unique-color-dark" dark expand="md">
         <MDBNavbarBrand href="/bad-route">
@@ -38,13 +39,20 @@ const MenuView = ({toggleCollapse, isOpen, logOut}) => {
             </MDBNavItem>
           </MDBNavbarNav>
           <MDBNavbarNav right>
+              { user.name ? (
+                <MDBNavbarBrand style={{marginRight: "1rem"}}>
+                   <span className="white-text">{user.email}</span> 
+                </MDBNavbarBrand>
+              ) : null }
             <MDBNavItem>
               <MDBDropdown>
                 <MDBDropdownToggle nav caret>
                   <MDBIcon icon="user" />
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default" right>
-                  <MDBDropdownItem href="#!">My Profile</MDBDropdownItem>
+                  <Link to ="/profile">
+                      <MDBDropdownItem >My Profile</MDBDropdownItem>
+                  </Link>
                   <MDBDropdownItem onClick={logOut} >Logout</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
