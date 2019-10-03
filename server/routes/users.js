@@ -49,8 +49,8 @@ router.get('/', auth, async (req, res) => {
   res.status(200).send(user);
 });
 
-router.post('/balance/:id', auth, async (req, res) => {
-  let user = await User.findById(req.params.id);
+router.post('/balance', auth, async (req, res) => {
+  let user = await User.findById(req.user._id);
   if (!user) return res.status(404).send('The user was not found.');
 
   const { error } = validateBalance(req.body);
