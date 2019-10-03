@@ -50,7 +50,13 @@ const userSchema = new mongoose.Schema({
     }
   },
   payments: {
-    
+    type: Array,
+    required: true
+  },
+  balance: {
+    type: Number,
+    required: true,
+    default: 0
   }
 });
 

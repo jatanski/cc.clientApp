@@ -31,7 +31,7 @@ router.post('/:id', auth, async (req, res) => {
         amount: req.body.amount,
         date: date
     });
-
+    
     user.balance = user.balance - req.body.amount;
 
     user.payments.unshift(payment);
