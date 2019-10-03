@@ -44,12 +44,41 @@ class Requests extends Component {
      });
   }
 
+  loadRequests = () => {
+    console.log("Loading requests...",)
+      // try {
+      //   const response = await fetch(`${baseModel.baseApiUrl}requests`, {
+      //     method: "GET",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //       ...baseModel.getAuthTokenHeaderObj()
+      //     }
+      //   });
+
+      //   let data;
+      //   if (response.headers.get("Content-Type").indexOf("text") >= 0) {
+      //     data = await response.text();
+      //   } else {
+      //     data = await response.json();
+      //     this.setState({
+      //         requests: data,
+      //         newRequest: data[0]
+      //     });
+      //   }
+      //   console.log(data)
+      // } catch (ex) {
+      //   console.log('Exception:', ex)
+      // }
+  }
+
   showRequests(isAdmin, newRequest) {
-    if (isAdmin && newRequest) {
+    if (!isAdmin) return '';
+
+    if (newRequest) {
       return <NewRequestsView { ...newRequest }{...this.requestHandlers} />;
-    } else if (isAdmin && !newRequest) {
-      return <NoNewRequestsView />;
-    } else return ''
+    } else {
+      return <NoNewRequestsView loadRequests={this.loadRequests} />;
+    };
   };
 
   requestHandlers = {
