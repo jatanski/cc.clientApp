@@ -4,6 +4,7 @@ const auth = require('../middleware/auth');
 const express = require("express");
 const router = express.Router();
 const { User, validate } = require("../models/user");
+const Joi = require('@hapi/joi');
 
 router.post("/", async (req, res) => {
     // Validate request with Joi
@@ -20,7 +21,7 @@ router.post("/", async (req, res) => {
     user = new User (_.pick(req.body, ['name', 'email', 'password', 'isAdmin', 'dateOfBirth']));
     // Generate salt and hashed password
     const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password, salt)
+    user.password = await bcrypt.hash(user.password, salt);
 
   await user.save();
 
@@ -44,8 +45,51 @@ router.delete("/:id", auth, async (req, res) => {
 router.get('/', auth, async (req, res) => {
   let user = await User.findById(req.user._id);
   if (!user) return res.status(404).send('The user was not found.');
-  
+
   res.status(200).send(user);
 });
+
+router.post('/balance/:id', auth, async (req, res) => {
+  let user = await User.findById(req.params.id);
+  if (!user) return res.status(404).send('The user was not found.');
+
+  const { error } = validateBalance(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  user.balance += req.body.balance;
+
+  user = await user.save();
+
+  res.status(200).send('Added cash to account. Current balance: ' + user.balance);
+});
+
+router.get('/deadline/:id', auth, async (req, res) => {
+  let user = await User.findById(req.params.id);
+  if (!user) return res.status(404).send('The user was not found.');
+
+  const lastPayment = parseInt(user.payments[0].date);
+
+  const daysLeft = (lastPayment + 86400000 * 30 - new Date().getTime()) / 86400000;
+  const hoursLeft = daysLeft * 24;
+  const minutesLeft = hoursLeft * 60;
+  const dateLeftObject = {
+    days: Math.floor(daysLeft),
+    hours: Math.floor(hoursLeft),
+    minutes: Math.floor(minutesLeft)
+  };
+
+  res.status(200).send(dateLeftObject);
+});
+
+function validateBalance(balance) {
+  const schema = {
+    balance: Joi.number()
+        .min(0)
+        .required()
+  };
+
+  return Joi.validate(balance, schema);
+}
+
 
 module.exports = router;
