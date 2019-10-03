@@ -57,6 +57,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: true,
     default: 0
+  },
+  notes: {
+    type: Array,
+    required: true
   }
 });
 
