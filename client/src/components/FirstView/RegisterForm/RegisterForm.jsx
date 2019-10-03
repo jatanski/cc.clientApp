@@ -71,6 +71,7 @@ class RegisterForm extends Component {
           baseModel.save("user", data);
           console.log("Logging...");
           allActions.logIn();
+          this.props.history.push("/home");
         }
       });
     } catch (error) {

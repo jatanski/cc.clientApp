@@ -1,6 +1,6 @@
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
-const mongoose = require("mongoose");
+const auth = require('../middleware/auth');
 const express = require("express");
 const router = express.Router();
 const { User, validate } = require("../models/user");
@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
   if (user) return res.status(400).send("User already registered.");
 
     // Create and save User
-    user = new User (_.pick(req.body, ['name', 'email', 'password']));
+    user = new User (_.pick(req.body, ['name', 'email', 'password', 'isAdmin', 'dateOfBirth']));
     // Generate salt and hashed password
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt)
@@ -26,6 +26,26 @@ router.post("/", async (req, res) => {
 
   const token = user.generateAuthToken();
   res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));
+});
+
+router.delete("/:id", auth, async (req, res) => {
+
+  // Check if admin
+  if(!req.user.isAdmin) return res.status(403).send('You are not an admin.');
+
+  // Check if user exist
+  let user = await User.findById( req.param.id );
+  if (!user) return res.status(400).send("User not found.");
+
+  await user.remove();
+  res.send('User has been deleted.');
+});
+
+router.get('/', auth, async (req, res) => {
+  let user = await User.findById(req.user._id);
+  if (!user) return res.status(404).send('The user was not found.');
+  
+  res.status(200).send(user);
 });
 
 module.exports = router;

@@ -19,3 +19,6 @@ yarn start
 ```
 yarn start
 ```
+#### Set jwtPrivateKey(in server folder)
+```
+set ReactApp_jwtPrivateKey=mySecureKey

@@ -33,15 +33,17 @@ class FirstView extends Component {
       showRegisterForm: false,
       showForgetPassForm: true
     });
-  };               
+  };
 
   loginFormProps = {
     changeFormToRegister: this.changeFormToRegister,
-    changeFormToForgetPass: this.changeFormToForgetPass
+    changeFormToForgetPass: this.changeFormToForgetPass,
+    history: this.props.history
   };
 
   registerFormProps = {
-    changeForm: this.changeFormToLogin
+    changeForm: this.changeFormToLogin,
+    history: this.props.history
   };
 
   forgetPassFormProps = {
@@ -49,6 +51,7 @@ class FirstView extends Component {
   };
 
   render = () => {
+    console.log(this.props);
     return (
       <section className="firstView">
         {this.state.showLoginForm ? (

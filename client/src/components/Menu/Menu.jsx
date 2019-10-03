@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import MenuView from './MenuView';
+import { allActions } from "../../redux/store";
+import baseModel from "../../baseModel";
+import { withRouter } from "react-router-dom";
 
 class Menu extends React.Component {
     state = {
@@ -17,11 +19,18 @@ class Menu extends React.Component {
         setActiveLink: this.setActiveLink
     }
 
+    logOut = () => {
+        allActions.logOut();
+        baseModel.onLogout();
+        this.props.history.push("/");
+    }
+
     render() {
         return (
             <>
             { this.props.loginStatus ? (
-                <MenuView 
+                <MenuView
+                    logOut={this.logOut}
                     isOpen={this.state.isOpen}
                     {...this.menuProps}>
                 </MenuView>
@@ -37,4 +46,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(Menu);
+export default connect(mapStateToProps, null)(withRouter(Menu));
