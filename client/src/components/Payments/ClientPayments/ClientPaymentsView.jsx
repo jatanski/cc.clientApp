@@ -14,7 +14,7 @@ const ClientPaymentsView = ({users}) => {
     return (
         <section className="payments">
             <MDBContainer >
-                <MDBRow scrollY>
+                <MDBRow>
                     
                         {renderCard}
                     </MDBRow> 
