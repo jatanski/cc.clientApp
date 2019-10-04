@@ -58,7 +58,10 @@ class CreateMessage extends Component  {
         }
     }
 
-    onPersonChange = ev => this.setState({recipient: ev.target.value})
+    onPersonChange = ev => this.setState({
+        recipient: ev.target.value,
+        recipientID: ev.target.value
+    })
     onTitleChange = ev => this.setState({title: ev.target.value});
     onMessageChange = ev => this.setState({message: ev.target.value});
 
