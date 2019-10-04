@@ -3,17 +3,18 @@ import { MDBCard, MDBCol, MDBRow, MDBView, MDBMask, MDBCardImage, MDBCardBody, M
 import src1 from '../../../assets/avatar.png';
 import "./profile.scss";
 
-const ProfilePageView =  () => {
+const ProfilePageView =  ({user}) => {
   return (
     <React.Fragment>
         <MDBRow className="justify-content-center">
         <MDBCol sm="12" md="6" lg="3" className="mb-5">
             <MDBCard>
-                <MDBCardImage className="img-fluid" src={src1} />
+                <MDBCardImage className="img-fluid" src={user.avatar ? user.avatar : src1} />
+                {console.log(user.avatar)}
                 <MDBCardBody>
-                    <MDBCardTitle className="text-center mb-2 font-bold h3">Jon Snow</MDBCardTitle>
-                    <MDBCardTitle sub className="text-center indigo-text mb-2 font-bold">abc@test.com</MDBCardTitle>
-                    <MDBCardTitle sub className="text-center indigo-text mb-2 font-bold">01.01.1990</MDBCardTitle>
+                    <MDBCardTitle className="text-center mb-2 font-bold h3">{user.name ? user.name : null}</MDBCardTitle>
+                    <MDBCardTitle sub className="text-center indigo-text mb-2 font-bold">{user.email ? user.email : null}</MDBCardTitle>
+                    <MDBCardTitle sub className="text-center indigo-text mb-2 font-bold">{user.dateOfBirth ? user.dateOfBirth : null}</MDBCardTitle>
                     <MDBCardText>
                         <strong className="mb-2">About: </strong>
                         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione perferendis quod animi dignissimos consectetur quibusdam numquam laboriosam, minus, provident...
@@ -70,7 +71,7 @@ const ProfilePageView =  () => {
               />
              <MDBInput
                 label="Password"
-                icon="key"
+                icon="lock-open"
                 group
                 type="password"
                 validate
@@ -79,7 +80,7 @@ const ProfilePageView =  () => {
               />
              <MDBInput
                 label="Confirm password"
-                icon="key"
+                icon="lock"
                 group
                 type="password"
                 validate
@@ -101,7 +102,7 @@ const ProfilePageView =  () => {
                     aria-describedby="inputGroupFileAddon01"
                     />
                     <label className="custom-file-label" htmlFor="inputGroupFile01">
-                    Choose file
+                      File...
                     </label>
                 </div>
             </div>
