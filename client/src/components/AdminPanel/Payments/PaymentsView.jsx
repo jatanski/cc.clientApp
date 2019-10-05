@@ -6,7 +6,7 @@ import { MDBCardHeader, MDBCard, MDBNavLink, MDBContainer, MDBIcon, MDBRow, MDBC
 const PaymentsView = ({users}) => {
     const renderCard = users.map(user => {
         return (
-            <MDBCol key={user.name}>
+            <MDBCol className="admin-col-payment" key={user.name}>
                 <PaymentCard  user={user}></PaymentCard>
             </MDBCol>
             

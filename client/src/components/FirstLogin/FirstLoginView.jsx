@@ -1,8 +1,13 @@
 import React from 'react'
+import "./FirstLogin.scss"
+import logo1 from "./img/blur-communication-computer-2148217.jpg"
+import logo2 from "./img/computer-contemporary-devices-2089379.jpg"
+import logo3 from "./img/computer-hands-laptop-2115217.jpg"
+
 import {
     MDBCardHeader,
     MDBCard,
-    MDBDataTable,
+    MDBCardImage,
     MDBListGroupItem,
     MDBCardBody,
     MDBCardTitle,
@@ -16,139 +21,61 @@ import { defaultProps } from 'recompose';
 
 const FristLoginView = () => {
 
-    const data = {
-        columns: [{
-                label: 'Name',
-                field: 'name',
-                sort: 'asc',
-                width: 150
-            },
-            {
-                label: 'Surname',
-                field: 'position',
-                sort: 'asc',
-                width: 150
-            },
-            {
-                label: 'Price',
-                field: 'salary',
-                sort: 'asc',
-                width: 100
-            },
-            {
-                label: 'Age',
-                field: 'age',
-                sort: 'asc',
-                width: 200
-            }
-        ],
-        rows: [{
-                name: 'Tiger Nixon',
-                position: 'System Architect',
-                salary: '$320',
-                age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Buy subscription
-            </button>
-            },
-            {
-                name: 'Garrett Winters',
-                position: 'Accountant',
-                salary: '$170',
-                age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Buy subscription
-            </button>
-                
-            },
-            {
-                name: 'Ashton Cox',
-                position: 'Junior Technical Author',
-                salary: '$86',
-                age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Buy subscription
-            </button>
-                
-            },
-            {
-                name: 'Cedric Kelly',
-                position: 'Senior Javascript Developer',
-                salary: '$433',
-                age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Buy subscription
-            </button>
-            },
-            {
-                name: 'Airi Satou',
-                position: 'Accountant',
-                salary: '$162',
-                age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Buy subscription
-            </button>
-                
-            },
-            {
-                name: 'Brielle Williamson',
-                position: 'Integration Specialist',
-                salary: '$372',
-                age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Buy subscription
-            </button>
-                
-            },
-            {
-                name: 'Herrod Chandler',
-                position: 'Sales Assistant',
-                salary: '$137',
-                age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Buy subscription
-            </button>
-                
-            },
-            {
-                name: 'Rhona Davidson',
-                position: 'Integration Specialist',
-                salary: '$327',
-                age: <button type="submit" className="btn btn-outline-success waves-effect">
-                Buy subscription
-            </button>
-                
-            },
-            {
-                name: 'Colleen Hurst',
-                position: 'Javascript Developer',
-                salary: '$205',
-                age: <button onClick={() => console.log('ess')} className="btn btn-outline-success waves-effect">
-                Buy subscription
-            </button>
-                
-            }
-            
-            
-        ]
-    };
+   
     return (
-        <MDBContainer>
-            <MDBRow>
-                <MDBCol>
-                    <MDBCard className="mb-4">
-                        <MDBCardHeader>
-                            <MDBCardTitle>List of Mentors</MDBCardTitle>
-                        </MDBCardHeader>
-                        <MDBCardBody>
-                            <MDBDataTable
-                            scrollY
-                            maxHeight="20vh"
-                            striped
-                            bordered
-                            small
-                            data={data}
-                            />
-                            
-                        </MDBCardBody>
-                    </MDBCard>
-                </MDBCol>
-            </MDBRow>
-        </MDBContainer>
-        
+        <section >
+            <MDBContainer>
+                <div className="card-deck mx-2 my-2 text-center">
+                        <MDBCard className="card mb-4">
+                            <MDBCardHeader className="list-header">Extra hiperr mega pack</MDBCardHeader>
+                            <MDBCardBody>
+                                <MDBCardImage className="img-fluid" src={logo1} waves />
+                                <MDBListGroupItem  className="list-item-text">
+                                    Full option - contat 24/7, online streams, free access to my videos
+                                </MDBListGroupItem>
+                                <MDBListGroupItem className="list-item">
+                                    <button type="submit" className="btn btn-outline-success waves-effect">
+                                        Buy subscription
+                                    </button>
+                                </MDBListGroupItem>
+                                <MDBCardTitle className="title">Cost: 500$/month</MDBCardTitle>
+                            </MDBCardBody>
+                        </MDBCard>
+                        <MDBCard className="card mb-4">
+                            <MDBCardHeader  className="list-header">Big pack</MDBCardHeader>
+                            <MDBCardBody>
+                                <MDBCardImage className="img-fluid" src={logo2} waves />
+                                <MDBListGroupItem className="list-item-text">
+                                    Consultiong throught messages, access to 10 videos on my site
+                                </MDBListGroupItem>
+                                <MDBListGroupItem className="list-item">
+                                    <button type="submit" className="btn btn-outline-success waves-effect">
+                                        Buy subscription
+                                    </button>
+                                </MDBListGroupItem>
+                                <MDBCardTitle className="title">Cost: 300$/month</MDBCardTitle>
+                            </MDBCardBody>
+                        </MDBCard>
+                        <MDBCard className="card mb-4">
+                            <MDBCardHeader className="list-header">Small pack</MDBCardHeader>
+                            <MDBCardBody>
+                                <MDBCardImage className="img-fluid" src={logo3} waves />
+                                <MDBListGroupItem className="list-item-text">
+                                    
+                                    Acces to my 5 videos and 5 meeting on skype.
+                                </MDBListGroupItem>
+                                <MDBListGroupItem className="list-item">
+                                    <button
+                                    type="submit" className="btn btn-outline-success waves-effect">
+                                        Buy subscription
+                                    </button>
+                                </MDBListGroupItem>
+                                <MDBCardTitle className="title">Cost: 100$/month</MDBCardTitle>
+                            </MDBCardBody>
+                        </MDBCard>
+                </div>
+            </MDBContainer>
+        </section>
     );
 }
 
