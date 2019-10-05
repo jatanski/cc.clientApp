@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import baseModel from '../baseModel';
-
 import {
     MDBContainer,
     MDBRow,

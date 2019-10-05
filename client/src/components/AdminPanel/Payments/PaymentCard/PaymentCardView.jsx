@@ -7,8 +7,6 @@ import {
     MDBCardBody,
     MDBCardTitle
 } from 'mdbreact';
-import { defaultProps } from 'recompose';
-
 
 const PaymentCardView = ({name, payments}) => {
 

@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { allActions } from "./redux/store";
 
 import Menu from "./components/Menu/Menu";
 import FirstView from "./views/FirstView";

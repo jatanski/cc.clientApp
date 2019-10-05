@@ -1,5 +1,5 @@
 import React from 'react'
-import { MDBCard, MDBCol, MDBRow, MDBView, MDBMask, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBCardFooter, MDBBtn, MDBIcon, MDBInput, MDBContainer } from 'mdbreact';
+import { MDBCard, MDBCol, MDBRow, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn, MDBIcon, MDBInput, MDBContainer } from 'mdbreact';
 import src1 from '../../../assets/avatar.png';
 import "./profile.scss";
 

@@ -13,7 +13,8 @@ class Menu extends React.Component {
     componentDidMount() {
         if( baseModel.isUserLoggedIn() ) {
             allActions.logIn();
-            allActions.setUser(baseModel.getUserFromLocal())
+            allActions.setUser(baseModel.getUserFromLocal());
+            // this.props.history.push("/home");
         }
     }
 
