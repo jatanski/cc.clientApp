@@ -1,5 +1,5 @@
 import React from "react";
-import { MDBTable, MDBTableBody, MDBTableHead, MDBContainer, MDBCard, MDBRow, MDBCol, MDBCardBody, MDBIcon, MDBNavLink } from 'mdbreact';
+import { MDBTable, MDBTableBody, MDBTableHead, MDBContainer, MDBCard, MDBRow, MDBCol, MDBCardBody, MDBIcon } from 'mdbreact';
 const ClientPaymentsView = ({users}) => {
     // const renderCard = users.map(user => {
     //     return (

@@ -1,10 +1,8 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { allActions } from "./redux/store";
 
 import Menu from "./components/Menu/Menu";
 import FirstView from "./views/FirstView";
-
 import MainView from "./views/MainView";
 import MessagesView from "./views/MessagesView";
 import ClientPayments from "./components/Payments/ClientPayments/ClientPayments";

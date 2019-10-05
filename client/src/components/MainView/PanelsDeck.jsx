@@ -9,8 +9,8 @@ import baseModel from "../../baseModel";
 import "../../scss/views/mainView.scss";
 
 class PanelsDeck extends Component {
-  constructor () {
-    super();
+  constructor(props) {
+    super(props);
     this.state = ({
       newMessage: '',
       isAdmin: '',
@@ -40,7 +40,7 @@ class PanelsDeck extends Component {
       });
       const user = await response.json();
 
-    let date = new Date;
+    let date = new Date();
     date = date.toLocaleString(undefined, {
       day: 'numeric',
       month: 'numeric',

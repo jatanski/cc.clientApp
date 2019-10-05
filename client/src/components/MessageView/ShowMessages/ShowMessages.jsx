@@ -84,6 +84,7 @@ class ShowMessages extends Component {
                     })
                 })
             }
+            return data;
         } catch (ex) {
             console.log('Exception:', ex)
         }
@@ -108,6 +109,7 @@ class ShowMessages extends Component {
                     messages: this.state.messages.filter(el => el._id !== id)
                 })
             }
+            return data;
         } catch (ex) {
             console.log('Exception:', ex)
         }

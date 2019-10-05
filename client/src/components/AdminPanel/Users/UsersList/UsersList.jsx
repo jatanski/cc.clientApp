@@ -1,19 +1,43 @@
 import React, { Component } from 'react';
 import UsersListView from './UsersListView';
+import baseModel from '../../../../baseModel';
+import { withRouter } from 'react-router-dom';
 
 class UsersList extends Component {
     state = {
-        contacts: [
-            { id: 1, name: 'Aleksandra Przytuła' },
-            { id: 2, name: 'Bartosz robak' },
-            { id: 3, name: 'Grzegorz Witczak'},
-            { id: 4, name: 'Jakub Tański'},
-            { id: 5, name: 'Michał Olech' },
-            { id: 6, name: 'Paweł Praczyk'},
-        ],
+        contacts: []
     }
-    componentDidUpdate() {
-        console.log('update')
+
+    componentDidMount() {
+        this.getContacts();
+    }
+
+    getContacts = async () => {
+        try {
+            const response = await fetch(`${baseModel.baseApiUrl}users/list`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...baseModel.getAuthTokenHeaderObj()
+                }
+            });
+
+            let data;
+            if (response.headers.get("Content-Type").indexOf("text") >= 0) {
+                data = await response.text();
+            } else {
+                data = await response.json();
+                this.setState((state, props) => {
+                    return {
+                        contacts: data
+                    }
+                });
+            }
+            console.log(data)
+            return data;
+        } catch (ex) {
+            console.log('Exception:', ex)
+        }
     }
 
     onUserDelete = id => {
@@ -28,20 +52,13 @@ class UsersList extends Component {
         // When 200 delete user from redux adn update view
     }
 
-    onUserEdit = id => {
-        console.log(id)
-        // Display modal / component below
-
-        // Fill inputs with user data
-
-        // After editing create updatedUserObj and send request
-
-        // Update user on front adn redirect to users list
+    onEmailClickRedirect = id => {
+        this.props.history.push(`/administration/mailing/${id}`);
     }
 
     viewProps = {
         onDelete: this.onUserDelete,
-        onEdit: this.onUserEdit
+        onEmailClick: this.onEmailClickRedirect
     }
 
     render() {
@@ -51,4 +68,4 @@ class UsersList extends Component {
     }
 }
 
-export default UsersList;
+export default withRouter(UsersList);
