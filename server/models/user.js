@@ -23,11 +23,15 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 1024
   },
-  isAdmin: Boolean,
+  isAdmin: {
+    type: Boolean,
+    required: true
+  },
   dateOfBirth: {
-    type: Number,
+    type: String,
     minlength: 10,
-    maxlength: 11
+    maxlength: 11,
+    required: true,
   },
   messages: {
     sent: {
@@ -42,7 +46,24 @@ const userSchema = new mongoose.Schema({
       type: Array,
       required: true
     }
-  }
+  },
+  clientsRequests: Array,
+  clients: Array,
+  // {
+  //   client: {
+  //     type: String,
+  //     required: true
+  //   },
+  //   date: {
+  //     type: Date,
+  //     required: true
+  //   },
+  //   isPaid: {
+  //     type: Boolean,
+  //     required: true
+  //   },
+  // },
+  signedAdmin: Array,
 });
 
 
@@ -67,11 +88,19 @@ function validateUser(user) {
     password: Joi.string()
       .min(5)
       .max(1024)
-      .required()
+      .required(),
+    dateOfBirth: Joi.string()
+      .min(10)
+      .max(11)
+      .required(),
+    isAdmin: Joi.boolean()
+      .required(),
+  }
+    
+  return Joi.validate(user, schema);
   };
 
-  return Joi.validate(user, schema);
-}
+  
 
 module.exports.User = User;
 module.exports.validate = validateUser;
