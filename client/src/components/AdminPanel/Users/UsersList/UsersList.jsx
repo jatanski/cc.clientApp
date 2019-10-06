@@ -33,6 +33,36 @@ class UsersList extends Component {
                     }
                 });
             }
+            return data;
+        } catch (ex) {
+            console.log('Exception:', ex)
+        }
+    }
+
+    onUserDelete = async (id, name) => {
+        const answear = prompt(`You are trying to delete user: ${name}.\nType "YES" to confirm.`);
+        if(answear.toUpperCase() !== 'YES') return;
+
+        try {
+            const response = await fetch(`${baseModel.baseApiUrl}users/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...baseModel.getAuthTokenHeaderObj()
+                }
+            });
+
+            let data;
+            if (response.headers.get("Content-Type").indexOf("text") >= 0) {
+                data = await response.text();
+            } else {
+                data = await response.json();
+                    this.setState({
+                        contacts: this.state.contacts.filter(user => {
+                            return user._id !== id
+                        })
+                    });
+            }
             console.log(data)
             return data;
         } catch (ex) {
@@ -40,20 +70,11 @@ class UsersList extends Component {
         }
     }
 
-    onUserDelete = id => {
-        this.setState({
-                contacts: this.state.contacts.filter(user => {
-                    return user.id !== id
-                })
+    onEmailClickRedirect = (id, email) => {
+        this.props.history.push({
+            pathname: '/administration/mailing',
+            search: `id=${id}&email=${email}`
         })
-
-        // Send user delete request to api
-
-        // When 200 delete user from redux adn update view
-    }
-
-    onEmailClickRedirect = id => {
-        this.props.history.push(`/administration/mailing/${id}`);
     }
 
     viewProps = {

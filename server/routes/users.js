@@ -87,8 +87,7 @@ router.post('/balance', auth, async (req, res) => {
 
 
 router.delete("/:id", [auth, admin], async (req, res) => {
-
-  let user = await User.findById( req.param.id );
+  let user = await User.findById( req.params.id );
   if (!user) return res.status(400).send("User not found.");
 
   await user.remove();
