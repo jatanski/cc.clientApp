@@ -15,7 +15,7 @@ const SendEmailsView = (props) => {
             <MDBCardHeader>Send e-mail</MDBCardHeader>
             <form onSubmit={props.onSend}>
                 <MDBCardBody>
-                        <p>To: {props.email ? props.email : 'Send to all users - not supported yet'}</p>
+                        <p>To: {props.email ? props.email : 'Send to all users'}</p>
                         <MDBInput
                             label="Subject"
                             type="text"
