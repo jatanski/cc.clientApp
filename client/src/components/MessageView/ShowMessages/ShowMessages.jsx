@@ -8,7 +8,7 @@ class ShowMessages extends Component {
         this.state = {
             messages: [],
             loader: false,
-            messagesType: 'sent'
+            messagesType: ''
         };
     }
 
@@ -19,12 +19,11 @@ class ShowMessages extends Component {
     }
 
     componentDidMount() {
-        this.getMessages('received')
+        this.getMessages('sent')
     }
 
     getMessages = async (type) => {
         if(type === this.state.messagesType) return;
-
         type = (type === 'refresh') ? this.state.messagesType : type;
 
         try {
@@ -123,6 +122,7 @@ class ShowMessages extends Component {
                 loader={ this.state.loader }
                 onDelete={ this.onDeleteMessage }
                 onRead={ this.onReadMessage }
+                type={ this.state.messagesType }
                 disableBtn={ true } />
         )
     }

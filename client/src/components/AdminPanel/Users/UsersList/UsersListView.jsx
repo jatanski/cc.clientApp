@@ -8,7 +8,7 @@ import {
     MDBIcon
 } from "mdbreact";
 
-const UsersListView = ({contacts, notes, onEmailClick, onDelete, onClientAddNoteWindow, onClientAddNote, onClientDeleteNote}) => {
+const UsersListView = ({contacts, notes, onEmailClick, onDelete, onClientAddNoteWindow, onClientAddNote, onClientDeleteNote, onMessageSend}) => {
 
     const usersJSX = contacts.map(contact =>{
         let note = null;
@@ -20,14 +20,18 @@ const UsersListView = ({contacts, notes, onEmailClick, onDelete, onClientAddNote
                 <span>Name: {contact.name}</span>
                 <div className="user-actions">
                     <MDBIcon
-                        icon="pencil-alt"
-                        className="blue-text"
-                        onClick ={onClientAddNoteWindow.bind(this)}
+                        icon="comment-alt"
+                        className="orange-text"
+                        onClick ={() => onMessageSend(contact._id, contact.name)}
                         fixed />
                     <MDBIcon
                         icon="at"
                         className="blue-text"
                         onClick ={() => onEmailClick(contact._id, contact.email)}
+                        fixed />
+                    <MDBIcon
+                        icon="pencil-alt"
+                        onClick ={onClientAddNoteWindow.bind(this)}
                         fixed />
                     <MDBIcon
                         icon="trash-alt"
