@@ -25,20 +25,20 @@ const ClientPaymentsView = ({user, add, payments, deadline}) => {
 
     const renderButton = () => {
         const a = true;
-        if (deadline.days === 0)
+        if (deadline.days > 0)
         {
-            return ( <button 
+            return (<div>
+                <h6>Your next payment should be made in {deadline.days} days</h6>
+                <h3>Thanks for your support</h3>
+            </div> );
+        }
+        return (
+            <button 
                 onClick={add}
                 type="submit" 
                 className="btn btn-outline-success waves-effect">
                     Pay for Subscription
-                </button>);
-        }
-        return (
-            <div>
-                <h6>Your next payment should be made in {deadline.days} days</h6>
-                <h3>Thanks for your support</h3>
-            </div>
+                </button>
         );
     }
 
