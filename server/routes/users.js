@@ -15,7 +15,7 @@ router.get('/', auth, async (req, res) => {
 });
 
 router.get('/list', [auth, admin], async (req, res) => {
-    let users = await User.find({}, ['name', 'email']);
+    let users = await User.find({}, ['name', 'email', 'payments']);
     if (!users) return res.status(404).send('Not a single user was found.');
     res.status(200).send(users);
 });

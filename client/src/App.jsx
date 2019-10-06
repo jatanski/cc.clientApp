@@ -20,7 +20,7 @@ const App = ({ loginStatus, onFakeLogin }) => {
           <Route path="/" exact component={FirstView} />
           <Route path="/login" component={FirstView} />
           <Route path="/home" component={MainView} />
-          <Route path="/messages" component={MessagesView} />
+          <Route path="/messages" component={ClientPayments} />
           <Route path="/payment" component={FirstLogin} />
           <Route path="/administration" component={AdminPanel} />
           <Route path="/profile" component={ProfilePage} />
