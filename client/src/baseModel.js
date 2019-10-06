@@ -35,6 +35,23 @@ class BaseModel {
     localStorage.removeItem("user");
     localStorage.removeItem("reactAppToken");
   }
+
+  static mapSearchToObject(search) {
+    let temp = search.slice(1).split('&');
+    
+    if(temp.length < 2) return null;
+
+    temp = temp.map(el => {
+        const splitedArr = el.split('=')
+        return {
+            [splitedArr[0]]: splitedArr[1],
+        }
+    })
+    .reduce((a, b) => {
+        return {...a, ...b}
+    }, {})
+    return temp;
+  }
 }
 
 export default BaseModel;

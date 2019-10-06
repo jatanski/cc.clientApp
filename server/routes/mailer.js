@@ -20,7 +20,7 @@ router.post('/', [auth, admin], (req, res) => {
     });
 
     var mailOptions = {
-        from: req.body.from,
+        from: config.get('mailUser'),
         to: req.body.to,
         subject: req.body.subject,
         html: req.body.html

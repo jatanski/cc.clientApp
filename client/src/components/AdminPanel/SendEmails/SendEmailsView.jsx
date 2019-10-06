@@ -8,20 +8,26 @@ import {
     MDBBtn
 } from "mdbreact";
 
-const SendEmailsView = () => {
+const SendEmailsView = (props) => {
 
     return (
         <MDBCard>
-            <MDBCardHeader>Send e-mail to all users</MDBCardHeader>
-            <form>
+            <MDBCardHeader>Send e-mail</MDBCardHeader>
+            <form onSubmit={props.onSend}>
                 <MDBCardBody>
+                        <p>To: {props.email ? props.email : 'Send to all users - not supported yet'}</p>
+                        <MDBInput
+                            label="Subject"
+                            type="text"
+                            onChange={props.onSubjectChange}
+                        />
                         <MDBInput
                             label="Your e-mail message"
                             type="textarea"
-                            validate
-                            success="right"
-                            error="wrong"
+                            onChange={props.onBodyChange}
                         />
+                        { props.info ? (<p style={{textAlign: 'center'}}>{props.info}</p>) : null }
+                        <small style={{fontStyle: 'italic', color: '#aaa'}}>* html tags available</small>
                 </MDBCardBody>
                 <MDBCardFooter className="text-center ">
                     <MDBBtn 

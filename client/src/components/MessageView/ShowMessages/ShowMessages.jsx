@@ -42,12 +42,12 @@ class ShowMessages extends Component {
             } else {
                 data = await response.json();
                 this.setState({
-                    messages: data,
+                    messages: data.reverse(),
                     messagesType: type,
                     loader: false,
                 });
             }
-            console.log(data)
+            return data;
         } catch (ex) {
             console.log('Exception:', ex)
         }

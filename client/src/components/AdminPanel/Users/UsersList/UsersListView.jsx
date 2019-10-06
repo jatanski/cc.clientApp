@@ -19,12 +19,12 @@ const UsersListView = ({contacts, onEmailClick, onDelete}) => {
                     <MDBIcon 
                         icon="at"
                         className="blue-text"
-                        onClick ={() => onEmailClick(contact._id)} 
+                        onClick ={() => onEmailClick(contact._id, contact.email)} 
                         fixed />
                     <MDBIcon 
                         icon="trash-alt"
                         className="red-text"
-                        onDoubleClick ={() => onDelete(contact._id)} 
+                        onDoubleClick ={() => onDelete(contact._id, contact.name)} 
                         fixed />
                 </div>
             </div>
