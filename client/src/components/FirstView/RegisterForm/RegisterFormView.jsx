@@ -7,7 +7,8 @@ import {
   MDBBtn,
   MDBCard,
   MDBCardBody,
-  MDBModalFooter
+  MDBModalFooter,
+  MDBNavLink
 } from "mdbreact";
 import RadioInput from "./RegisterFormRadioInput";
 import "./registerForm.scss";
