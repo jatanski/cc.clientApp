@@ -30,12 +30,16 @@ const userSchema = new mongoose.Schema({
     maxlength: 1024
   },
   isAdmin: {
-      default: false
+    type: Boolean,
+    required: true,
+    default: false
   },
   dateOfBirth: {
-    type: Number,
+    type: String,
     minlength: 10,
-    maxlength: 11
+    maxlength: 11,
+    required: true,
+    default: "01.01.1993"
   },
   messages: {
     sent: {
@@ -50,6 +54,17 @@ const userSchema = new mongoose.Schema({
       type: Array,
       required: true
     }
+  },
+  clientsRequests: {
+    type: Array,
+    required: true
+  },
+  clients: {
+    type: Array,
+    required: true
+  },
+  signedAdmin: {
+    type: String
   },
   payments: {
     type: Array,
@@ -80,6 +95,7 @@ function validateUser(user) {
       .min(5)
       .max(50)
       .required(),
+    avatar: "https://osclass.calinbehtuk.ro/oc-content/themes/vrisko/images/no_user.png",
     email: Joi.string()
       .min(5)
       .max(255)
@@ -88,11 +104,18 @@ function validateUser(user) {
     password: Joi.string()
       .min(5)
       .max(1024)
-      .required()
+      .required(),
+    dateOfBirth: Joi.string()
+      .min(10)
+      .max(11)
+    // isAdmin: Joi.boolean()
+    //   .required()
+  }
+    
+  return Joi.validate(user, schema);
   };
 
-  return Joi.validate(user, schema);
-}
+  
 
 module.exports.User = User;
 module.exports.validate = validateUser;

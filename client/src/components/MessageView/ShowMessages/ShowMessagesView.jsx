@@ -13,7 +13,7 @@ import {
 
 const ShowMessagesView = ({messages, load, onDelete, onRead}) => {
 
-    const messagesJSXArr = messages.reverse().map(message => {
+    const messagesJSXArr = messages.map(message => {
         const timeDiff = Date.now() - message.date;
         const timeDays = Math.floor(timeDiff / 1000 / 60 / 60 / 24);
         return (

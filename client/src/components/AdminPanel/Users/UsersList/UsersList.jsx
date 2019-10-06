@@ -5,11 +5,13 @@ import { withRouter } from 'react-router-dom';
 
 class UsersList extends Component {
     state = {
-        contacts: []
+        contacts: [],
+        notes: []
     }
 
     componentDidMount() {
         this.getContacts();
+        this.getNotes();
     }
 
     getContacts = async () => {
@@ -33,37 +35,128 @@ class UsersList extends Component {
                     }
                 });
             }
-            console.log(data)
             return data;
         } catch (ex) {
             console.log('Exception:', ex)
         }
     }
 
-    onUserDelete = id => {
-        this.setState({
-                contacts: this.state.contacts.filter(user => {
-                    return user.id !== id
-                })
-        })
+    getNotes = async () => {
+        try {
+            const response = await fetch(`${baseModel.baseApiUrl}notes`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...baseModel.getAuthTokenHeaderObj()
+                }
+            });
 
-        // Send user delete request to api
-
-        // When 200 delete user from redux adn update view
+            let data;
+            if (response.headers.get("Content-Type").indexOf("text") >= 0) {
+                data = await response.text();
+            } else {
+                data = await response.json();
+                this.setState((state, props) => {
+                    return {
+                        notes: data
+                    }
+                });
+            }
+            return data;
+        } catch (ex) {
+            console.log('Exception:', ex)
+        }
     }
 
-    onEmailClickRedirect = id => {
-        this.props.history.push(`/administration/mailing/${id}`);
+    onUserDelete = async (id, name) => {
+        const answear = prompt(`You are trying to delete user: ${name}.\nType "YES" to confirm.`);
+        if(answear && answear.toUpperCase() !== 'YES') return;
+
+        try {
+            const response = await fetch(`${baseModel.baseApiUrl}users/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...baseModel.getAuthTokenHeaderObj()
+                }
+            });
+
+            let data;
+            if (response.headers.get("Content-Type").indexOf("text") >= 0) {
+                data = await response.text();
+            } else {
+                data = await response.json();
+                    this.setState({
+                        contacts: this.state.contacts.filter(user => {
+                            return user._id !== id
+                        })
+                    });
+            }
+            return data;
+        } catch (ex) {
+            console.log('Exception:', ex)
+        }
+    }
+
+    onEmailClickRedirect = (id, email) => {
+        this.props.history.push({
+            pathname: '/administration/mailing',
+            search: `id=${id}&email=${email}`
+        })
+    }
+
+    onClientAddNoteWindow = (e) => {
+        let box = e.target.parentNode.parentNode.parentNode.children[2];
+        box.classList.toggle('hidden');
+    }
+
+    onClientAddNote = async (id, e) => {
+        let note = e.target.parentNode.children[0].value;
+        try {
+            const response = await fetch(`${baseModel.baseApiUrl}notes`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...baseModel.getAuthTokenHeaderObj()
+                },
+                body: JSON.stringify({
+                    userId: id,
+                    comment: note
+                })
+            });
+            this.getNotes();
+        } catch (ex) {
+            console.log('Exception:', ex)
+        }
+    }
+
+    onClientDeleteNote = async (id, e) => {
+        let note = e.target.parentNode.children[0].value;
+        try {
+            const response = await fetch(`${baseModel.baseApiUrl}notes/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...baseModel.getAuthTokenHeaderObj()
+                }
+            });
+            this.getNotes();
+        } catch (ex) {
+            console.log('Exception:', ex)
+        }
     }
 
     viewProps = {
         onDelete: this.onUserDelete,
-        onEmailClick: this.onEmailClickRedirect
+        onEmailClick: this.onEmailClickRedirect,
+        onClientAddNoteWindow: this.onClientAddNoteWindow,
+        onClientAddNote: this.onClientAddNote,
+        onClientDeleteNote: this.onClientDeleteNote
     }
 
     render() {
         return (
-            <UsersListView contacts={this.state.contacts} {...this.viewProps} />
+            <UsersListView contacts={this.state.contacts} notes={this.state.notes} {...this.viewProps} />
         )
     }
 }

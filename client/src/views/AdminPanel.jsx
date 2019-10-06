@@ -52,7 +52,7 @@ class MessagesView extends Component {
                             <Switch>
                                 <Redirect exact from={this.props.match.url} to={this.props.match.url + '/users'} />
                                 <Route path={this.props.match.url + '/users'} component={UsersList} />
-                                <Route path={this.props.match.url + '/mailing'} component={SendEmails} />
+                                <Route path={this.props.match.url + '/mailing'} exact component={SendEmails} />
                                 <Route path={this.props.match.url + '/messages'} component={SendMessages} />
                                 <Route path={this.props.match.url + '/payments'} component={Payments} />
                             </Switch>
