@@ -70,7 +70,7 @@ class UsersList extends Component {
 
     onUserDelete = async (id, name) => {
         const answear = prompt(`You are trying to delete user: ${name}.\nType "YES" to confirm.`);
-        if(answear.toUpperCase() !== 'YES') return;
+        if(answear && answear.toUpperCase() !== 'YES') return;
 
         try {
             const response = await fetch(`${baseModel.baseApiUrl}users/${id}`, {
