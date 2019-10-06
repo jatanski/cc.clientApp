@@ -8,9 +8,11 @@ import {
     MDBIcon
 } from "mdbreact";
 
-const UsersListView = ({contacts, notes, onEmailClick, onDelete, onClientAddNoteWindow, onClientAddNote}) => {
+const UsersListView = ({contacts, notes, onEmailClick, onDelete, onClientAddNoteWindow, onClientAddNote, onClientDeleteNote}) => {
 
-    const usersJSX = contacts.map(contact =>{ let note = notes.forEach((e) => {if(e.userId === contact._id) console.log(e);});
+    const usersJSX = contacts.map(contact =>{
+        let note = null;
+        notes.forEach((e) => {if(e.userId === contact._id){note = e.comment;}});
     return (
         <MDBListGroupItem
             key={contact._id}>
@@ -43,8 +45,17 @@ const UsersListView = ({contacts, notes, onEmailClick, onDelete, onClientAddNote
 
                 {
                 note ?
-                    <div className="md-form input-group mb-4 hidden">
-                        <h4>{note}</h4>
+                    <div className="mt-4 hidden">
+                        <div className="d-flex justify-content-between align-items-center">
+                            <span>Note: {note}</span>
+                            <div className="user-actions">
+                                <MDBIcon
+                                    icon="trash"
+                                    className="red-text"
+                                    onClick ={onClientDeleteNote.bind(this, contact._id)}
+                                    fixed />
+                            </div>
+                        </div>
                     </div> :
                     <div className="md-form input-group mb-4 hidden">
                         <input type="text" className="form-control" placeholder="Note" aria-label="Note" aria-describedby="material-addon2"/>
