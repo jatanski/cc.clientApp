@@ -19,6 +19,11 @@ router.post("/", auth, async (req, res) => {
     if (!user) return res.status(404).send('The user with the given ID was not found.');
     if (user.signedAdmin) return res.status(400).send('You are already signed to an Admin.');
 
+    // Check if client already sent request to this admin
+    const idx = admin.clientsRequests.findIndex(request => request.user._id == req.user._id );
+    console.log(idx);
+    if (idx > -1) return res.status(403).send('You already sent request to this Admin!');
+
     // Create new request
     const date = Date.now();
 
