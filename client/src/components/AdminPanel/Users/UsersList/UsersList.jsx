@@ -77,9 +77,17 @@ class UsersList extends Component {
         })
     }
 
+    onClientAddNoteWindow = (e) => {
+        console.log(e.target.parentNode.parentNode.parentNode);
+        let box = e.target.parentNode.parentNode.parentNode;
+        let noteSection = "<div><input type=\"text\" class=\"form-control\" placeholder=\"Note\" aria-label=\"Note\" aria-describedby=\"material-addon1\"><button type=\"button\" class=\"btn btn-primary\">Submit Note</button></div>";
+        box.innerHTML += noteSection;
+    }
+
     viewProps = {
         onDelete: this.onUserDelete,
-        onEmailClick: this.onEmailClickRedirect
+        onEmailClick: this.onEmailClickRedirect,
+        onClientAddNoteWindow: this.onClientAddNoteWindow
     }
 
     render() {
