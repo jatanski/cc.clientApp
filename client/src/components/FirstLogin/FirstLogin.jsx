@@ -28,6 +28,7 @@ class FirstLogin extends Component {
             } else {
                 data = await response.json();
             } 
+            return data;
         } catch (ex) {
             console.log('Exception:', ex)
         }

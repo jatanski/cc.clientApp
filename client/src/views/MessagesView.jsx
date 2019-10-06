@@ -5,7 +5,6 @@ import {
     MDBCol,
 } from "mdbreact";
 
-import ShowContacts from '../components/MessageView/ShowContacts/ShowContacts';
 import ShowMessages from '../components/MessageView/ShowMessages/ShowMessages';
 import CreateMessage from '../components/MessageView/CreateMessage/CreateMessage';
 

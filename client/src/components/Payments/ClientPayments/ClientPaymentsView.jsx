@@ -1,5 +1,5 @@
 import React from "react";
-import { MDBListGroup, MDBCardTitle, MDBCardHeader, MDBContainer, MDBCard, MDBRow, MDBCol, MDBCardBody, MDBListGroupItem, MDBNavLink } from 'mdbreact';
+import { MDBListGroup, MDBCardTitle, MDBCardHeader, MDBContainer, MDBCard, MDBRow, MDBCol, MDBCardBody, MDBListGroupItem } from 'mdbreact';
 const ClientPaymentsView = ({user, add, payments, deadline}) => {
 
     function addZero(i) {
