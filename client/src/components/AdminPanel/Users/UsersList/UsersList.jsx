@@ -36,6 +36,8 @@ class UsersList extends Component {
                     }
                 });
             }
+            console.log(this.state.contacts)
+
             return data;
         } catch (ex) {
             console.log('Exception:', ex)
@@ -87,12 +89,12 @@ class UsersList extends Component {
                 data = await response.text();
             } else {
                 data = await response.json();
-                    this.setState({
-                        contacts: this.state.contacts.filter(user => {
-                            return user._id !== id
-                        })
-                    });
             }
+            this.setState({
+                contacts: this.state.contacts.filter(user => {
+                    return user._id !== id
+                })
+            });
             return data;
         } catch (ex) {
             console.log('Exception:', ex)
