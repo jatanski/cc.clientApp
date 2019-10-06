@@ -131,13 +131,13 @@ class UsersList extends Component {
                 })
             });
             this.getNotes();
+            return response;
         } catch (ex) {
             console.log('Exception:', ex)
         }
     }
 
     onClientDeleteNote = async (id, e) => {
-        let note = e.target.parentNode.children[0].value;
         try {
             const response = await fetch(`${baseModel.baseApiUrl}notes/${id}`, {
                 method: "DELETE",
@@ -147,6 +147,7 @@ class UsersList extends Component {
                 }
             });
             this.getNotes();
+            return response;
         } catch (ex) {
             console.log('Exception:', ex)
         }

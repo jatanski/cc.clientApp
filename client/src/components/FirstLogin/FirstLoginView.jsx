@@ -13,10 +13,7 @@ import {
     MDBCardTitle,
     MDBNavLink,
     MDBContainer,
-    MDBRow,
-    MDBCol
 } from 'mdbreact';
-import { defaultProps } from 'recompose';
 
 
 const FristLoginView = ({request}) => {

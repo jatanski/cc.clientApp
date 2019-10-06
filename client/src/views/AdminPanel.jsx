@@ -11,7 +11,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 
 import UsersList from '../components/AdminPanel/Users/UsersList/UsersList';
 import SendEmails from '../components/AdminPanel/SendEmails/SendEmails';
-import SendMessages from '../components/AdminPanel/SendMessages/SendMessages';
+// import SendMessages from '../components/AdminPanel/SendMessages/SendMessages';
 import Payments from '../components/AdminPanel/Payments/Payments';
 
 class MessagesView extends Component {

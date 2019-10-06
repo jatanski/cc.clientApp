@@ -32,7 +32,6 @@ class Payments extends React.Component {
                     }
                 });
             }
-            console.log(data)
             return data;
         } catch (ex) {
             console.log('Exception:', ex)
