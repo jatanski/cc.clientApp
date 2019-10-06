@@ -11,7 +11,7 @@ import {
     MDBBadge
 } from "mdbreact";
 
-const ShowMessagesView = ({messages, load, onDelete, onRead}) => {
+const ShowMessagesView = ({messages, load, onDelete, onRead, type}) => {
 
     const messagesJSXArr = messages.map(message => {
         const timeDiff = Date.now() - message.date;
@@ -38,7 +38,10 @@ const ShowMessagesView = ({messages, load, onDelete, onRead}) => {
 
     return (
         <MDBCard>
-            <MDBCardHeader>Recent Messages</MDBCardHeader>
+            <MDBCardHeader className="d-flex justify-content-between align-items-center">
+                <span>Recent Messages</span>
+                <code className="secondary-text">{type.toUpperCase()}</code>
+            </MDBCardHeader>
             <MDBCardBody>
                 
                 <MDBListGroup>

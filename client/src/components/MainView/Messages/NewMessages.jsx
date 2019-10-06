@@ -11,6 +11,9 @@ const NewMessages = ({
 }) => {
     sender.surname = sender.surname || 'Smith';
     sender.avatar = sender.avatar || avatar;
+    // date = new Date(parseInt(date));
+    const timeDiff = parseInt(date) - Date.now();
+    const timeDays = Math.floor(timeDiff / 1000 / 60 / 60 / 24);
     return (
       <div className="card">
         <div className="card-header">
@@ -33,7 +36,9 @@ const NewMessages = ({
           <p className="card-text">{textContent.slice(0, 60)}...</p>
         </div>
         <div className="card-footer text-center">
-          <small className="text-muted">Recieved at {date}</small><br />
+          <small className="text-muted">
+            Received { timeDays < 1 ? ` today` : ` ${timeDiff} day ago`}
+          </small><br />
           <Link to="/messages">
             <MDBBtn color="deep-orange" type="button">
                 Messages

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import NewRequestsView from "./NewRequestsView";
 import NoNewRequestsView from "./NoNewRequestsView";
+import SendRequestView from "./SendRequestView";
+import MyAdminView from "./MyAdminView";
 import baseModel from "../../../baseModel";
 
 class Requests extends Component {
@@ -8,7 +10,8 @@ class Requests extends Component {
     super(props);
     this.state = ({
       requests: this.props.requests,
-      newRequest: this.props.requests[0]
+      newRequest: this.props.requests[0],
+      signedAdmin: this.props.signedAdmin
     });
   }
 
@@ -17,7 +20,8 @@ class Requests extends Component {
       this.setState({
         requests: this.props.requests,
         newRequest: this.props.requests[0],
-        isAdmin: this.props.isAdmin
+        isAdmin: this.props.isAdmin,
+        signedAdmin: this.props.signedAdmin
       });
     };
   }
@@ -35,13 +39,21 @@ class Requests extends Component {
     const newRequest = this.state.newRequest
 
     try {
-      await fetch(`${baseModel.baseApiUrl}requests/${choice}/${newRequest.id}`, {
+      const response = await fetch(`${baseModel.baseApiUrl}requests/${choice}/${newRequest.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           ...baseModel.getAuthTokenHeaderObj()
         }
       });
+      let data;
+      if (response.headers.get("Content-Type").indexOf("text") >= 0) {
+        data = await response.text();
+      } else {
+        data = await response.json();
+      } 
+
+      console.log('Response: ', data);
     } catch (ex) {
       console.log('Exception:', ex)
     }
@@ -87,13 +99,49 @@ class Requests extends Component {
             newRequest: requests[0]
           });
         }
+        console.log('Response: ', data);
       } catch (ex) {
         console.log('Exception:', ex)
       }
   }
 
-  showRequests(isAdmin, newRequest) {
-    if (!isAdmin) return '';
+  getAdmins = async () => {
+    try {
+      const response = await fetch(`${baseModel.baseApiUrl}users/list`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          ...baseModel.getAuthTokenHeaderObj()
+        }
+      });
+
+      let data;
+      if (response.headers.get("Content-Type").indexOf("text") >= 0) {
+        data = await response.text();
+      } else {
+        data = await response.json();
+      }
+      
+      const admins = data.filter(user => user.isAdmin);
+  
+      return admins;
+
+    } catch (ex) {
+      console.log('Exception:', ex)
+    }
+  }
+  
+  showRequests = (isAdmin, newRequest, signedAdmin) => {
+    if (!isAdmin && !signedAdmin) {
+      return (
+      <SendRequestView adminList={this.getAdmins()}></SendRequestView>
+      );
+    } else if (!isAdmin && signedAdmin) {
+      return (
+        <MyAdminView adminEmail={signedAdmin} changeAdmin={this.changeAdmin}></MyAdminView>
+        );
+    }
+
 
     if (newRequest) {
       return <NewRequestsView { ...newRequest }{...this.requestHandlers} />;
@@ -102,14 +150,34 @@ class Requests extends Component {
     };
   };
 
+  changeAdmin = async () => {
+    const confirm = window.confirm("Are You sure?");
+    if (!confirm) return;
+
+    await fetch(baseModel.baseApiUrl + "users/resetAdmin", {
+      method: "PUT",
+      headers: { 
+        "Content-Type": "application/json",
+        ...baseModel.getAuthTokenHeaderObj()
+      },
+    });
+
+    this.setState({
+      signedAdmin: ''
+    });
+
+  }
+
   requestHandlers = {
     acceptRequest: this.acceptRequest,
     declineRequest: this.declineRequest
   }
 
+
+
   render = () => {
     return (
-      this.showRequests(this.state.isAdmin, this.state.newRequest)
+      this.showRequests(this.state.isAdmin, this.state.newRequest, this.state.signedAdmin)
     )
   };
 }
