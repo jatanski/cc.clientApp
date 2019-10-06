@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import UsersListView from './UsersListView';
 import baseModel from '../../../../baseModel';
 import { withRouter } from 'react-router-dom';
-import ReactDOM from 'react-dom';
 
 class UsersList extends Component {
     state = {
@@ -120,12 +119,28 @@ class UsersList extends Component {
                     "Content-Type": "application/json",
                     ...baseModel.getAuthTokenHeaderObj()
                 },
-                body: {
+                body: JSON.stringify({
                     userId: id,
                     comment: note
+                })
+            });
+            this.getNotes();
+        } catch (ex) {
+            console.log('Exception:', ex)
+        }
+    }
+
+    onClientDeleteNote = async (id, e) => {
+        let note = e.target.parentNode.children[0].value;
+        try {
+            const response = await fetch(`${baseModel.baseApiUrl}notes/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...baseModel.getAuthTokenHeaderObj()
                 }
             });
-            console.log(response.text());
+            this.getNotes();
         } catch (ex) {
             console.log('Exception:', ex)
         }
@@ -135,7 +150,8 @@ class UsersList extends Component {
         onDelete: this.onUserDelete,
         onEmailClick: this.onEmailClickRedirect,
         onClientAddNoteWindow: this.onClientAddNoteWindow,
-        onClientAddNote: this.onClientAddNote
+        onClientAddNote: this.onClientAddNote,
+        onClientDeleteNote: this.onClientDeleteNote
     }
 
     render() {
