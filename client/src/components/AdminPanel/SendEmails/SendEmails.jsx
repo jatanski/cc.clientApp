@@ -24,9 +24,13 @@ class SendEmails extends Component {
     }
 
     onSend = async ev => {
-        ev.preventDefault()
+        ev.preventDefault();
         
-        if(!this.state.id) return;
+        let emailObj = {
+            subject: this.state.subject,
+            html: this.state.body,
+            to: this.state.id ? this.state.email : 'all@gmail.com'
+        };
 
         try {
             const response = await fetch(`${baseModel.baseApiUrl}mailer`, {
@@ -35,11 +39,7 @@ class SendEmails extends Component {
                     "Content-Type": "application/json",
                     ...baseModel.getAuthTokenHeaderObj()
                 },
-                body: JSON.stringify({
-                    to: this.state.email,
-                    subject: this.state.subject,
-                    html: this.state.body,
-                })
+                body: JSON.stringify(emailObj)
             });
 
             let data;
@@ -48,10 +48,8 @@ class SendEmails extends Component {
             } else {
                 data = await response.json();
             }
-            this.setState({
-                info: data
-            })
-            console.log(data)
+            
+            this.setState({info: data})
             return data;
         } catch (ex) {
             console.log('Exception:', ex)
@@ -77,7 +75,6 @@ class SendEmails extends Component {
     }
 
     render() {
-        console.log(this.state)
         return (
             <SendEmailsView {...this.state} {...this.propsObj} />
         )
