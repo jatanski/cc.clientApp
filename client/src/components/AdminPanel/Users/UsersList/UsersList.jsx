@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import UsersListView from './UsersListView';
 import baseModel from '../../../../baseModel';
 import { withRouter } from 'react-router-dom';
+import ReactDOM from 'react-dom';
 
 class UsersList extends Component {
     state = {
@@ -78,16 +79,19 @@ class UsersList extends Component {
     }
 
     onClientAddNoteWindow = (e) => {
-        console.log(e.target.parentNode.parentNode.parentNode);
-        let box = e.target.parentNode.parentNode.parentNode;
-        let noteSection = "<div><input type=\"text\" class=\"form-control\" placeholder=\"Note\" aria-label=\"Note\" aria-describedby=\"material-addon1\"><button type=\"button\" class=\"btn btn-primary\">Submit Note</button></div>";
-        box.innerHTML += noteSection;
+        let box = e.target.parentNode.parentNode.parentNode.children[2];
+        box.classList.toggle('hidden');
+    }
+
+    onClientAddNote = (id, e) => {
+        console.log(id, e.target.parentNode.children[0].value);
     }
 
     viewProps = {
         onDelete: this.onUserDelete,
         onEmailClick: this.onEmailClickRedirect,
-        onClientAddNoteWindow: this.onClientAddNoteWindow
+        onClientAddNoteWindow: this.onClientAddNoteWindow,
+        onClientAddNote: this.onClientAddNote
     }
 
     render() {

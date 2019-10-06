@@ -8,7 +8,7 @@ import {
     MDBIcon
 } from "mdbreact";
 
-const UsersListView = ({contacts, onEmailClick, onDelete, onClientAddNoteWindow}) => {
+const UsersListView = ({contacts, onEmailClick, onDelete, onClientAddNoteWindow, onClientAddNote}) => {
 
     const usersJSX = contacts.map(contact => (
         <MDBListGroupItem
@@ -38,6 +38,11 @@ const UsersListView = ({contacts, onEmailClick, onDelete, onClientAddNoteWindow}
                 <span style={{ marginRight: '1rem'}}>E-mail: { contact.email }</span>
                 <small>_id: { contact._id }</small>
 
+            </div>
+
+            <div className="md-form input-group mb-4 hidden">
+                <input type="text" className="form-control" placeholder="Note" aria-label="Note" aria-describedby="material-addon2"/>
+                <button type="button" className="btn btn-primary" onClick={onClientAddNote.bind(this, contact._id)}>Submit Note</button>
             </div>
         </MDBListGroupItem>
     ))

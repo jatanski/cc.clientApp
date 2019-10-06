@@ -22,7 +22,7 @@
 
         .fa {
             opacity: .5;
-            
+
             &:not(:last-child) {
                 margin-right: .5rem;
             }
@@ -31,5 +31,9 @@
         .fa:hover {
             opacity: 1;
         }
+    }
+
+    .hidden {
+        display: none;
     }
 }
