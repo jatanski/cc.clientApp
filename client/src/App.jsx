@@ -24,6 +24,7 @@ const App = ({ loginStatus, onFakeLogin }) => {
           <Route path="/payment" component={ClientPayments} />
           <Route path="/administration" component={AdminPanel} />
           <Route path="/profile" component={ProfilePage} />
+          <Route path="/subscription" component={FirstLogin} />
           <Route render={() => <h1>Error 404 - Trzeba coś tu zrobić =</h1>} />
         </Switch>
       </main>
