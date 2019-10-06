@@ -1,6 +1,6 @@
 import React from "react";
 import { MDBListGroup, MDBCardTitle, MDBCardHeader, MDBContainer, MDBCard, MDBRow, MDBCol, MDBCardBody, MDBListGroupItem, MDBNavLink } from 'mdbreact';
-const ClientPaymentsView = ({user, add, payments}) => {
+const ClientPaymentsView = ({user, add, payments, deadline}) => {
 
     function addZero(i) {
         if (i < 10) {
@@ -25,16 +25,20 @@ const ClientPaymentsView = ({user, add, payments}) => {
 
     const renderButton = () => {
         const a = true;
-        if (a)
+        if (deadline.days === 0)
         {
-            return (<button 
-                type="button" 
-            className="btn btn-outline-danger waves-effect">
-                Cancel Subscription
-            </button>);
+            return ( <button 
+                onClick={add}
+                type="submit" 
+                className="btn btn-outline-success waves-effect">
+                    Pay for Subscription
+                </button>);
         }
         return (
-            <h3>Thanks for your support</h3>
+            <div>
+                <h6>Your next payment should be made in {deadline.days} days</h6>
+                <h3>Thanks for your support</h3>
+            </div>
         );
     }
 
@@ -51,12 +55,6 @@ const ClientPaymentsView = ({user, add, payments}) => {
                                 {renderPayments}
                             </MDBListGroup>
                             <div className="bottom-element">
-                                <button 
-                                    onClick={add}
-                                    type="submit" 
-                                    className="btn btn-outline-success waves-effect">
-                                    Pay for Subscription
-                                </button>
                                 {renderButton()}
                             </div>
                         </MDBCardBody>

@@ -10,14 +10,25 @@ import {
 
 const PaymentCardView = ({name, payments}) => {
 
+    function addZero(i) {
+        if (i < 10) {
+            i = "0" + i
+        };
+        return i;
+    }
+
     const renderPayments = payments.map(item => {
-        const day = item.dateOfFinalize.getDate();
-        const month = item.dateOfFinalize.getMonth();
-        const year = item.dateOfFinalize.getFullYear();
+        var date = new Date(parseInt(item.date));
+        const day = date.getDate();
+        const month = date.getMonth()+1;
+        const year = date.getFullYear();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
         return (
-            <MDBListGroupItem key={item.amount}>
+            <MDBListGroupItem key={item._id}>
                 Amount: {item.amount} <br />
-                Date: {`${day}/${month}/${year}`}
+                Date: {`${addZero(day)}-${addZero(month)}-${year} ${addZero(hours)}:${addZero(minutes)}:${addZero(seconds)}`}
             </MDBListGroupItem>);
     })
 

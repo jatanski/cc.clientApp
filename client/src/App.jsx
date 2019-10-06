@@ -20,8 +20,8 @@ const App = ({ loginStatus, onFakeLogin }) => {
           <Route path="/" exact component={FirstView} />
           <Route path="/login" component={FirstView} />
           <Route path="/home" component={MainView} />
-          <Route path="/messages" component={ClientPayments} />
-          <Route path="/payment" component={FirstLogin} />
+          <Route path="/messages" component={MessagesView} />
+          <Route path="/payment" component={ClientPayments} />
           <Route path="/administration" component={AdminPanel} />
           <Route path="/profile" component={ProfilePage} />
           <Route render={() => <h1>Error 404 - Trzeba coś tu zrobić =</h1>} />

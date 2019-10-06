@@ -14,14 +14,14 @@ router.get('/', auth, async (req, res) => {
   res.status(200).send(user);
 });
 
-router.get('/list', [auth, admin], async (req, res) => {
+router.get('/list', auth, async (req, res) => {
     let users = await User.find({}, ['name', 'email', 'payments']);
     if (!users) return res.status(404).send('Not a single user was found.');
     res.status(200).send(users);
 });
 
-router.get('/deadline/:id', auth, async (req, res) => {
-  let user = await User.findById(req.params.id);
+router.get('/deadline/', auth, async (req, res) => {
+  let user = await User.findById(req.user._id);
   if (!user) return res.status(404).send('The user was not found.');
 
   const lastPayment = parseInt(user.payments[0].date);
@@ -85,6 +85,16 @@ router.post('/balance', auth, async (req, res) => {
   res.status(200).send('Added cash to account. Current balance: ' + user.balance);
 });
 
+router.post('/subscriptionPrice', auth, async (req, res) => {
+  let user = await User.findById(req.user._id);
+  if (!user) return res.status(404).send('The user was not found.');
+
+  user.subscriptionPrice = req.body.subscriptionPrice;
+
+  user = await user.save();
+
+  res.status(200).send('Added subscriptionprize');
+});
 
 router.delete("/:id", [auth, admin], async (req, res) => {
   let user = await User.findById( req.params.id );

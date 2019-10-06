@@ -1,6 +1,6 @@
 import React from 'react';
 import PaymentsView from './PaymentsView';
-import baseModel from '../../../../baseModel';
+import baseModel from '../../../baseModel';
 
 
 class Payments extends React.Component {
@@ -8,6 +8,9 @@ class Payments extends React.Component {
         users: []
     }
 
+    componentDidMount() {
+        this.getContacts();
+    }
     getContacts = async () => {
         try {
             const response = await fetch(`${baseModel.baseApiUrl}users/list`, {

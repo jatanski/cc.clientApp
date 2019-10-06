@@ -11,7 +11,7 @@ import {
     MDBListGroupItem,
     MDBCardBody,
     MDBCardTitle,
-    MDBBtn,
+    MDBNavLink,
     MDBContainer,
     MDBRow,
     MDBCol
@@ -19,7 +19,7 @@ import {
 import { defaultProps } from 'recompose';
 
 
-const FristLoginView = () => {
+const FristLoginView = ({request}) => {
 
    
     return (
@@ -33,10 +33,12 @@ const FristLoginView = () => {
                                 <MDBListGroupItem  className="list-item-text">
                                     Full option - contat 24/7, online streams, free access to my videos
                                 </MDBListGroupItem>
-                                <MDBListGroupItem className="list-item">
-                                    <button type="submit" className="btn btn-outline-success waves-effect">
+                                <MDBListGroupItem 
+                                className="list-item">
+                                    <MDBNavLink to="/home" exact ><button type="submit" className="btn btn-outline-success waves-effect"
+                                    onClick={() => request(500)}>
                                         Buy subscription
-                                    </button>
+                                    </button></MDBNavLink>
                                 </MDBListGroupItem>
                                 <MDBCardTitle className="title">Cost: 500$/month</MDBCardTitle>
                             </MDBCardBody>
@@ -49,9 +51,10 @@ const FristLoginView = () => {
                                     Consultiong throught messages, access to 10 videos on my site
                                 </MDBListGroupItem>
                                 <MDBListGroupItem className="list-item">
-                                    <button type="submit" className="btn btn-outline-success waves-effect">
+                                    <MDBNavLink to="/home" exact ><button type="submit" className="btn btn-outline-success waves-effect"
+                                    onClick={() => request(300)}>
                                         Buy subscription
-                                    </button>
+                                    </button></MDBNavLink>
                                 </MDBListGroupItem>
                                 <MDBCardTitle className="title">Cost: 300$/month</MDBCardTitle>
                             </MDBCardBody>
@@ -65,10 +68,10 @@ const FristLoginView = () => {
                                     Acces to my 5 videos and 5 meeting on skype.
                                 </MDBListGroupItem>
                                 <MDBListGroupItem className="list-item">
-                                    <button
-                                    type="submit" className="btn btn-outline-success waves-effect">
+                                     <MDBNavLink to="/home" exact ><button type="submit" className="btn btn-outline-success waves-effect"
+                                    onClick={() => request(100)}>
                                         Buy subscription
-                                    </button>
+                                    </button></MDBNavLink>
                                 </MDBListGroupItem>
                                 <MDBCardTitle className="title">Cost: 100$/month</MDBCardTitle>
                             </MDBCardBody>

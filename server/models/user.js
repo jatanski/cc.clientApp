@@ -75,6 +75,10 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: 0
   },
+  subscriptionPrice: {
+    type: Number,
+    default: 0
+  },
   notes: {
     type: Array,
     required: true

@@ -1,24 +1,28 @@
 import React from 'react';
 import ClientPaymentsView from './ClientPaymentsView';
 import baseModel from "../../../baseModel";
+import { Date } from 'core-js';
 
 
 class ClientPayments extends React.Component {
     state = {
         user: '',
-        payments: []
+        payments: [],
+        price: 110,
+        deadline: new Date()
     }
 
     endpoint = "payments";
 
     componentDidMount = () => {
         this.init();
+        this.getDeadline();
     }
 
     addpayment = async (ev) => {
 
         const paymentBody = {
-            amount: 100
+            amount: this.state.price
         }
 
         try {
@@ -56,13 +60,31 @@ class ClientPayments extends React.Component {
         user.balance = 200
         this.setState({
             user: user,
-            payments: user.payments
+            payments: user.payments,
+            price: user.subscriptionPrice
+        });
+    }
+
+    getDeadline = async () => {
+        const token = baseModel.getAuthTokenHeaderObj()
+        const response = await fetch(baseModel.baseApiUrl + `users/deadline/`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "x-auth-token": token["x-auth-token"]
+            },
+        });
+        const user = await response.json();
+        console.log(user);
+        
+        this.setState({
+            deadline: user
         });
     }
 
     render() {
         return (
-            <ClientPaymentsView user={this.state.user} add={this.addpayment} payments={this.state.payments}>
+            <ClientPaymentsView user={this.state.user} add={this.addpayment} payments={this.state.payments} deadline={this.state.deadline}>
             </ClientPaymentsView>
         );
     }

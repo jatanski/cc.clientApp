@@ -16,7 +16,7 @@ const Payment = mongoose.model('Payment', new mongoose.Schema({
 
 function validatePayment(pay) {
     const schema = {
-        amount: Joi.number().max(100).min(100).required()
+        amount: Joi.number().min(100).required()
     };
 
     return Joi.validate(pay, schema);
