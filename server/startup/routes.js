@@ -8,6 +8,7 @@ const requestRouter = require('./../routes/requests');
 const paymentRouter = require('../routes/payments');
 const noteRouter = require('../routes/notes');
 const mailerRouter = require('../routes/mailer');
+const editUserRouter = require('../routes/editUsers')
 
 // -----
 const error = require('../middleware/error');
@@ -25,6 +26,7 @@ module.exports = function(app) {
   app.use('/api/payments', paymentRouter);
   app.use('/api/notes', noteRouter);
   app.use('/api/mailer', mailerRouter);
+  app.use('/api/editUser', editUserRouter);
 
   // Errors handler
   app.use(error);
