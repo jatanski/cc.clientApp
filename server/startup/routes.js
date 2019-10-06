@@ -4,7 +4,7 @@ const express = require('express');
 const userRouter = require('./../routes/users');
 const authRouter = require('../routes/auth');
 const messageRouter = require('../routes/messages');
-const requestRouter = require('./../routes/request');
+const requestRouter = require('./../routes/requests');
 const paymentRouter = require('../routes/payments');
 const noteRouter = require('../routes/notes');
 const mailerRouter = require('../routes/mailer');
@@ -21,7 +21,7 @@ module.exports = function(app) {
   app.use('/api/users', userRouter);
   app.use('/api/auth', authRouter);
   app.use('/api/messages', messageRouter);
-  app.use('/api/request', requestRouter);
+  app.use('/api/requests', requestRouter);
   app.use('/api/payments', paymentRouter);
   app.use('/api/notes', noteRouter);
   app.use('/api/mailer', mailerRouter);

@@ -54,9 +54,17 @@ const userSchema = new mongoose.Schema({
       required: true
     }
   },
-  clientsRequests: Array,
-  clients: Array,
-  signedAdmin: Array,
+  clientsRequests: {
+    type: Array,
+    required: true
+  },
+  clients: {
+    type: Array,
+    required: true
+  },
+  signedAdmin: {
+    type: String
+  },
   payments: {
     type: Array,
     required: true
@@ -100,7 +108,7 @@ function validateUser(user) {
       .max(11)
       .required(),
     isAdmin: Joi.boolean()
-      .required(),
+      .required()
   }
     
   return Joi.validate(user, schema);
