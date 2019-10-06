@@ -6,11 +6,13 @@ import ReactDOM from 'react-dom';
 
 class UsersList extends Component {
     state = {
-        contacts: []
+        contacts: [],
+        notes: []
     }
 
     componentDidMount() {
         this.getContacts();
+        this.getNotes();
     }
 
     getContacts = async () => {
@@ -31,6 +33,33 @@ class UsersList extends Component {
                 this.setState((state, props) => {
                     return {
                         contacts: data
+                    }
+                });
+            }
+            return data;
+        } catch (ex) {
+            console.log('Exception:', ex)
+        }
+    }
+
+    getNotes = async () => {
+        try {
+            const response = await fetch(`${baseModel.baseApiUrl}notes`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...baseModel.getAuthTokenHeaderObj()
+                }
+            });
+
+            let data;
+            if (response.headers.get("Content-Type").indexOf("text") >= 0) {
+                data = await response.text();
+            } else {
+                data = await response.json();
+                this.setState((state, props) => {
+                    return {
+                        notes: data
                     }
                 });
             }
@@ -64,7 +93,6 @@ class UsersList extends Component {
                         })
                     });
             }
-            console.log(data)
             return data;
         } catch (ex) {
             console.log('Exception:', ex)
@@ -83,8 +111,24 @@ class UsersList extends Component {
         box.classList.toggle('hidden');
     }
 
-    onClientAddNote = (id, e) => {
-        console.log(id, e.target.parentNode.children[0].value);
+    onClientAddNote = async (id, e) => {
+        let note = e.target.parentNode.children[0].value;
+        try {
+            const response = await fetch(`${baseModel.baseApiUrl}notes`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...baseModel.getAuthTokenHeaderObj()
+                },
+                body: {
+                    userId: id,
+                    comment: note
+                }
+            });
+            console.log(response.text());
+        } catch (ex) {
+            console.log('Exception:', ex)
+        }
     }
 
     viewProps = {
@@ -96,7 +140,7 @@ class UsersList extends Component {
 
     render() {
         return (
-            <UsersListView contacts={this.state.contacts} {...this.viewProps} />
+            <UsersListView contacts={this.state.contacts} notes={this.state.notes} {...this.viewProps} />
         )
     }
 }

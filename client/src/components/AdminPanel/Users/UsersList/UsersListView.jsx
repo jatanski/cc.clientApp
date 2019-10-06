@@ -8,9 +8,10 @@ import {
     MDBIcon
 } from "mdbreact";
 
-const UsersListView = ({contacts, onEmailClick, onDelete, onClientAddNoteWindow, onClientAddNote}) => {
+const UsersListView = ({contacts, notes, onEmailClick, onDelete, onClientAddNoteWindow, onClientAddNote}) => {
 
-    const usersJSX = contacts.map(contact => (
+    const usersJSX = contacts.map(contact =>{ let note = notes.forEach((e) => {if(e.userId === contact._id) console.log(e);});
+    return (
         <MDBListGroupItem
             key={contact._id}>
             <div className="d-flex justify-content-between align-items-center">
@@ -40,12 +41,19 @@ const UsersListView = ({contacts, onEmailClick, onDelete, onClientAddNoteWindow,
 
             </div>
 
-            <div className="md-form input-group mb-4 hidden">
-                <input type="text" className="form-control" placeholder="Note" aria-label="Note" aria-describedby="material-addon2"/>
-                <button type="button" className="btn btn-primary" onClick={onClientAddNote.bind(this, contact._id)}>Submit Note</button>
-            </div>
+                {
+                note ?
+                    <div className="md-form input-group mb-4 hidden">
+                        <h4>{note}</h4>
+                    </div> :
+                    <div className="md-form input-group mb-4 hidden">
+                        <input type="text" className="form-control" placeholder="Note" aria-label="Note" aria-describedby="material-addon2"/>
+                        <button type="button" className="btn btn-primary" onClick={onClientAddNote.bind(this, contact._id)}>Submit Note</button>
+                    </div>
+                }
+
         </MDBListGroupItem>
-    ))
+    )});
 
     return (
         <MDBCard>
