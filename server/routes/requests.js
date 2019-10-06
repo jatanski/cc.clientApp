@@ -12,6 +12,7 @@ router.post("/", auth, async (req, res) => {
     // Get choosen Admin
     let admin = await User.findOne({email: req.body.adminEmail});
     if (!admin) return res.status(404).send('The admin with the given ID was not found.');
+    if (!admin.isAdmin) return res.status(400).send('This user is not an admin!');
 
     // Get id of the logged user
     const user = await User.findById(req.user._id)
@@ -19,8 +20,11 @@ router.post("/", auth, async (req, res) => {
     if (user.signedAdmin) return res.status(400).send('You are already signed to an Admin.');
 
     // Create new request
+    const date = Date.now();
+
     const newRequest = new ClientRequest({
-        user: user
+        user: user,
+        date: date
     });
     
     admin.clientsRequests.push(newRequest);
@@ -68,6 +72,13 @@ router.put("/:choice/:id", auth, async (req, res) => {
     client = await client.save();
     
     res.status(200).send(`Request ${choice}ed`);
+});
+
+router.get('/', auth, async (req, res) => {
+    const admin = await User.findById(req.user._id);
+    if (!admin) return res.status(404).send('The admin with the given ID was not found.');
+
+    res.status(200).send(admin.clientsRequests);
 });
 
 

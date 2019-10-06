@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 const Joi = require("@hapi/joi");
 
 const ClientRequest = mongoose
-    .model('ClientsRequests', new mongoose.Schema({ user: Object }));
+    .model('ClientsRequests', new mongoose.Schema({ 
+        user: Object,
+        date: Date
+    }));
 
 function validateRequest(request) {
     const schema = {

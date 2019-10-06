@@ -39,6 +39,7 @@ const userSchema = new mongoose.Schema({
     minlength: 10,
     maxlength: 11,
     required: true,
+    default: "01.01.1993"
   },
   messages: {
     sent: {
@@ -94,6 +95,7 @@ function validateUser(user) {
       .min(5)
       .max(50)
       .required(),
+    avatar: "https://osclass.calinbehtuk.ro/oc-content/themes/vrisko/images/no_user.png",
     email: Joi.string()
       .min(5)
       .max(255)
@@ -106,9 +108,8 @@ function validateUser(user) {
     dateOfBirth: Joi.string()
       .min(10)
       .max(11)
-      .required(),
-    isAdmin: Joi.boolean()
-      .required()
+    // isAdmin: Joi.boolean()
+    //   .required()
   }
     
   return Joi.validate(user, schema);
