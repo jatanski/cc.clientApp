@@ -3,14 +3,17 @@ import { MDBCard, MDBCol, MDBRow, MDBCardImage, MDBCardBody, MDBCardTitle, MDBCa
 import src1 from '../../../assets/avatar.png';
 import "./profile.scss";
 
-const ProfilePageView =  ({user}) => {
+const ProfilePageView = ({
+  user,
+  handleInputChange,
+  changeDetails
+}) => {
   return (
     <React.Fragment>
         <MDBRow className="justify-content-center">
         <MDBCol sm="12" md="6" lg="3" className="mb-5">
             <MDBCard>
                 <MDBCardImage className="img-fluid" src={user.avatar ? user.avatar : src1} />
-                {console.log(user.avatar)}
                 <MDBCardBody>
                     <MDBCardTitle className="text-center mb-2 font-bold h3">{user.name ? user.name : null}</MDBCardTitle>
                     <MDBCardTitle sub className="text-center indigo-text mb-2 font-bold">{user.email ? user.email : null}</MDBCardTitle>
@@ -34,6 +37,7 @@ const ProfilePageView =  ({user}) => {
           <form>
             <div className="grey-text">
               <MDBInput
+               onChange={handleInputChange}
                 label="Name"
                 icon="user"
                 group
@@ -41,6 +45,7 @@ const ProfilePageView =  ({user}) => {
                 validate
                 error="wrong"
                 success="right"
+                id="profileFormName"
               />
               <MDBInput
                 label="Surname"
@@ -107,7 +112,7 @@ const ProfilePageView =  ({user}) => {
                 </div>
             </div>
             <div className="text-center upload-file-form">
-              <MDBBtn outline color="secondary">
+              <MDBBtn onClick={changeDetails} outline color="secondary">
                 Confirm <MDBIcon icon="check" className="ml-1" />
               </MDBBtn>
             </div>
