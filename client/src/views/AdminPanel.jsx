@@ -34,12 +34,12 @@ class MessagesView extends Component {
                                     Mailing
                                     <MDBIcon icon="at" fixed />
                                 </MDBNavLink>
-                                <MDBNavLink 
+                                {/* <MDBNavLink 
                                     className="white-text" 
                                     to={this.props.match.url + '/messages'}>
                                     Messages
                                     <MDBIcon icon="envelope" fixed />
-                                </MDBNavLink>
+                                </MDBNavLink> */}
                                 <MDBNavLink 
                                     className="white-text" 
                                     to={this.props.match.url + '/payments'}>
@@ -53,7 +53,7 @@ class MessagesView extends Component {
                                 <Redirect exact from={this.props.match.url} to={this.props.match.url + '/users'} />
                                 <Route path={this.props.match.url + '/users'} component={UsersList} />
                                 <Route path={this.props.match.url + '/mailing'} exact component={SendEmails} />
-                                <Route path={this.props.match.url + '/messages'} component={SendMessages} />
+                                {/* <Route path={this.props.match.url + '/messages'} component={SendMessages} /> */}
                                 <Route path={this.props.match.url + '/payments'} component={Payments} />
                             </Switch>
                         </MDBCol>
