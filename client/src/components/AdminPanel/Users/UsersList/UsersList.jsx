@@ -36,8 +36,6 @@ class UsersList extends Component {
                     }
                 });
             }
-            console.log(this.state.contacts)
-
             return data;
         } catch (ex) {
             console.log('Exception:', ex)
