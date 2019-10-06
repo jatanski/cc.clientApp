@@ -41,10 +41,12 @@ class RegisterForm extends Component {
       return;
     }
     try {
+      console.log(this.state.isAdmin);
       const registerData = {
         name: this.state.registerFormName,
         email: this.state.registerFormEmail,
-        password: this.state.registerFormPassword
+        password: this.state.registerFormPassword,
+        isAdmin: this.state.isAdmin
       };
 
       this.setState({ showSpinner: true }, async () => {

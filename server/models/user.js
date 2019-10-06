@@ -1,97 +1,96 @@
-const jwt = require("jsonwebtoken")
-const config = require("config");
-const Joi = require("@hapi/joi");
-const mongoose = require("mongoose");
+const jwt = require('jsonwebtoken');
+const config = require('config');
+const Joi = require('@hapi/joi');
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
     minlength: 5,
-    maxlength: 50
+    maxlength: 50,
   },
   avatar: {
     type: String,
     minlength: 5,
     maxlength: 512,
-    deafult: "https://osclass.calinbehtuk.ro/oc-content/themes/vrisko/images/no_user.png"
+    deafult: 'https://osclass.calinbehtuk.ro/oc-content/themes/vrisko/images/no_user.png',
   },
   email: {
     type: String,
     required: true,
     unique: true,
     minlength: 5,
-    maxlength: 255
+    maxlength: 255,
   },
   password: {
     type: String,
     required: true,
     minlength: 5,
-    maxlength: 1024
+    maxlength: 1024,
   },
   isAdmin: {
     type: Boolean,
     required: true,
-    default: false
+    default: false,
   },
   dateOfBirth: {
     type: String,
     minlength: 10,
     maxlength: 11,
     required: true,
-    default: "01.01.1993"
+    default: '01.01.1993',
   },
   messages: {
     sent: {
       type: Array,
-      required: true
+      required: true,
     },
     received: {
       type: Array,
-      required: true
+      required: true,
     },
     bin: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   clientsRequests: {
     type: Array,
-    required: true
+    required: true,
   },
   clients: {
     type: Array,
-    required: true
+    required: true,
   },
   signedAdmin: {
-    type: String
+    type: String,
   },
   payments: {
     type: Array,
-    required: true
+    required: true,
   },
   balance: {
     type: Number,
     required: true,
-    default: 0
+    default: 0,
   },
   subscriptionPrice: {
     type: Number,
-    default: 0
+    default: 0,
   },
   notes: {
     type: Array,
-    required: true
-  }
+    required: true,
+  },
 });
-
 
 userSchema.methods.generateAuthToken = function() {
   const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, config.get('jwtPrivateKey'));
   return token;
-}
+};
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 
 function validateUser(user) {
   const schema = {
@@ -99,7 +98,7 @@ function validateUser(user) {
       .min(5)
       .max(50)
       .required(),
-    avatar: "https://osclass.calinbehtuk.ro/oc-content/themes/vrisko/images/no_user.png",
+    avatar: 'https://osclass.calinbehtuk.ro/oc-content/themes/vrisko/images/no_user.png',
     email: Joi.string()
       .min(5)
       .max(255)
@@ -111,15 +110,12 @@ function validateUser(user) {
       .required(),
     dateOfBirth: Joi.string()
       .min(10)
-      .max(11)
-    // isAdmin: Joi.boolean()
-    //   .required()
-  }
-    
-  return Joi.validate(user, schema);
+      .max(11),
+    isAdmin: Joi.boolean().required(),
   };
 
-  
+  return Joi.validate(user, schema);
+}
 
 module.exports.User = User;
 module.exports.validate = validateUser;
