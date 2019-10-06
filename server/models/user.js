@@ -10,6 +10,12 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 50
   },
+  avatar: {
+    type: String,
+    minlength: 5,
+    maxlength: 512,
+    deafult: "https://osclass.calinbehtuk.ro/oc-content/themes/vrisko/images/no_user.png"
+  },
   email: {
     type: String,
     required: true,
@@ -25,7 +31,8 @@ const userSchema = new mongoose.Schema({
   },
   isAdmin: {
     type: Boolean,
-    required: true
+    required: true,
+    default: false
   },
   dateOfBirth: {
     type: String,
@@ -49,21 +56,20 @@ const userSchema = new mongoose.Schema({
   },
   clientsRequests: Array,
   clients: Array,
-  // {
-  //   client: {
-  //     type: String,
-  //     required: true
-  //   },
-  //   date: {
-  //     type: Date,
-  //     required: true
-  //   },
-  //   isPaid: {
-  //     type: Boolean,
-  //     required: true
-  //   },
-  // },
   signedAdmin: Array,
+  payments: {
+    type: Array,
+    required: true
+  },
+  balance: {
+    type: Number,
+    required: true,
+    default: 0
+  },
+  notes: {
+    type: Array,
+    required: true
+  }
 });
 
 

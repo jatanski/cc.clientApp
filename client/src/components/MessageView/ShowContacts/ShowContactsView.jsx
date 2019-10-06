@@ -16,7 +16,7 @@ const ShowContactsView = ({contacts}) => {
             <MDBListGroupItem 
                 key={person}
                 onClick={() => allActions.setRecipient(person)}
-                hover> { person } 
+                hover> { person }
             </MDBListGroupItem>)
     });
 

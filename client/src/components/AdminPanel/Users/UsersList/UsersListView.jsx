@@ -8,24 +8,31 @@ import {
     MDBIcon
 } from "mdbreact";
 
-const UsersListView = ({contacts, onDelete, onEdit}) => {
+const UsersListView = ({contacts, onEmailClick, onDelete}) => {
 
     const usersJSX = contacts.map(contact => (
         <MDBListGroupItem 
-            className="d-flex justify-content-between align-items-center"
-            key={contact.id}>
-            {contact.name}
-            <div className='user-actions'>
-                <MDBIcon 
-                    icon="pencil-alt" 
-                    className="indigo-text"
-                    onClick={() => onEdit(contact.id)}
-                    fixed />
-                <MDBIcon 
-                    icon="trash-alt"
-                    className="red-text"
-                    onDoubleClick ={() => onDelete(contact.id)} 
-                    fixed />
+            key={contact._id}>
+            <div className="d-flex justify-content-between align-items-center">
+                <span>Name: {contact.name}</span>
+                <div className="user-actions">
+                    <MDBIcon 
+                        icon="at"
+                        className="blue-text"
+                        onClick ={() => onEmailClick(contact._id)} 
+                        fixed />
+                    <MDBIcon 
+                        icon="trash-alt"
+                        className="red-text"
+                        onDoubleClick ={() => onDelete(contact._id)} 
+                        fixed />
+                </div>
+            </div>
+
+            <div className=' d-flex justify-content-between align-items-center'>
+                <span style={{ marginRight: '1rem'}}>E-mail: { contact.email }</span>
+                <small>_id: { contact._id }</small>
+                
             </div>
         </MDBListGroupItem>
     )) 

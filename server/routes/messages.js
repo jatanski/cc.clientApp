@@ -1,8 +1,7 @@
 const { SentMessage, validate } = require('../models/sentMessage'); 
 const { ReceivedMessage } = require('../models/receivedMessage'); 
-const auth = require('../middleware/auth')
+const auth = require('../middleware/auth');
 const { User } = require('../models/user');
-
 const express = require('express');
 const router = express.Router();
 
@@ -61,21 +60,14 @@ router.post('/:id', auth, async (req, res) => {
     let sender = await User.findById(req.user._id);
     if (!sender) return res.status(404).send('The sender with the given ID was not found.');
 
-    let date = new Date;
-    date = date.toLocaleString(undefined, {
-        day: 'numeric',
-        month: 'numeric',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-    })
-  
+    const date = Date.now();
+    
     const sentMessage = new SentMessage({ 
       title: req.body.title,
       textContent: req.body.textContent,
       receivers: [
         {
-          email: sender.email,
+          email: receiver.email,
           _id: receiver._id
         }
       ],
@@ -86,14 +78,16 @@ router.post('/:id', auth, async (req, res) => {
         title: req.body.title,
         textContent: req.body.textContent,
         sender: {
-          email: sender.email,
+          name: sender.name,
+          surname: sender.surname,
+          avatar: sender.avatar,
           _id: sender._id
         },
         date: date
     });
 
-    receiver.messages.received.push(receivedMessage);
-    sender.messages.sent.push(sentMessage);
+    receiver.messages.received.unshift(receivedMessage);
+    sender.messages.sent.unshift(sentMessage);
 
     sender = await sender.save();
     receiver = await receiver.save();
