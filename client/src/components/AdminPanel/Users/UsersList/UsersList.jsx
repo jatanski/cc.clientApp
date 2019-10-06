@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import UsersListView from './UsersListView';
 import baseModel from '../../../../baseModel';
 import { withRouter } from 'react-router-dom';
+import { allActions } from '../../../../redux/store';
 
 class UsersList extends Component {
     state = {
@@ -105,6 +106,11 @@ class UsersList extends Component {
         })
     }
 
+    onMessageSend = (id, name) => {
+        this.props.history.push('/messages')
+        allActions.setRecipient({id, name})
+    }
+
     onClientAddNoteWindow = (e) => {
         let box = e.target.parentNode.parentNode.parentNode.children[2];
         box.classList.toggle('hidden');
@@ -151,7 +157,8 @@ class UsersList extends Component {
         onEmailClick: this.onEmailClickRedirect,
         onClientAddNoteWindow: this.onClientAddNoteWindow,
         onClientAddNote: this.onClientAddNote,
-        onClientDeleteNote: this.onClientDeleteNote
+        onClientDeleteNote: this.onClientDeleteNote,
+        onMessageSend: this.onMessageSend
     }
 
     render() {

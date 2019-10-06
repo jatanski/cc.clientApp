@@ -14,17 +14,25 @@ class CreateMessage extends Component  {
 
     endpoint = 'messages/';
 
-    componentDidUpdate(prevProps) {
-        if(this.props.recipient !== prevProps.recipient) {
-            this.setState(state => {
-                return {
-                    ...state,
-                    recipient: this.props.recipient,
-                    recipientID: this.props.recipient
-                }
-            })
-        }
+    componentDidMount() {
+        this.setState(state => {
+            return {
+                recipient: this.props.recipient.name,
+                recipientID: this.props.recipient.id
+            }
+        })
     }
+
+    // componentDidUpdate(prevProps) {
+    //     if(this.props.recipient.id !== prevProps.recipient.id) {
+    //         this.setState(state => {
+    //             return {
+    //                 recipient: this.props.recipient.name,
+    //                 recipientID: this.props.recipient.id
+    //             }
+    //         })
+    //     }
+    // }
 
     onFormSubmit = async (ev) => {
         ev.preventDefault();
@@ -62,6 +70,7 @@ class CreateMessage extends Component  {
         recipient: ev.target.value,
         recipientID: ev.target.value
     })
+
     onTitleChange = ev => this.setState({title: ev.target.value});
     onMessageChange = ev => this.setState({message: ev.target.value});
 

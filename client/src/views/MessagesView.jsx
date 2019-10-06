@@ -16,7 +16,6 @@ class MessagesView extends Component {
             <MDBContainer className="Messages">
                 <MDBRow>
                     <MDBCol md="4">
-                        <ShowContacts />
                         <CreateMessage />
                     </MDBCol>
                     <MDBCol md="8">
