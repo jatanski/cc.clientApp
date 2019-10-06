@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import NewRequestsView from "./NewRequestsView";
 import NoNewRequestsView from "./NoNewRequestsView";
+import baseModel from "../../../baseModel";
 
 class Requests extends Component {
   constructor (props) {
@@ -21,54 +22,74 @@ class Requests extends Component {
     };
   }
 
-  acceptRequest = (e) => {
-    e.preventDefault();
-    const requests = this.state.requests
-    requests.shift()
-    console.log("Accepted from: " + this.state.newRequest.name);
-    this.setState({ 
-      requests: requests,
-      newRequest: requests[0]
-     });
-  }
+  acceptRequest = async () => this.handleClickOnRequest("accept");
 
-  declineRequest = () => {
+  declineRequest = async () => {
     const confirm = window.confirm("Are You sure?");
     if (!confirm) return;
+
+    this.handleClickOnRequest("decline");
+  }
+
+  handleClickOnRequest = async (choice) => {
+    const newRequest = this.state.newRequest
+
+    try {
+      await fetch(`${baseModel.baseApiUrl}requests/${choice}/${newRequest.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          ...baseModel.getAuthTokenHeaderObj()
+        }
+      });
+    } catch (ex) {
+      console.log('Exception:', ex)
+    }
+    
     const requests = this.state.requests
     requests.shift()
-    console.log("Declined from: " + this.state.newRequest.name);
+    console.log(`${choice.toUpperCase()}: ${this.state.newRequest.name}`);
     this.setState({ 
       requests: requests,
       newRequest: requests[0]
      });
   }
 
-  loadRequests = () => {
+  loadRequests = async () => {
     console.log("Loading requests...",)
-      // try {
-      //   const response = await fetch(`${baseModel.baseApiUrl}requests`, {
-      //     method: "GET",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       ...baseModel.getAuthTokenHeaderObj()
-      //     }
-      //   });
+      try {
+        const response = await fetch(`${baseModel.baseApiUrl}requests`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            ...baseModel.getAuthTokenHeaderObj()
+          }
+        });
 
-      //   let data;
-      //   if (response.headers.get("Content-Type").indexOf("text") >= 0) {
-      //     data = await response.text();
-      //   } else {
-      //     data = await response.json();
-      //     this.setState({
-      //         requests: data,
-      //         newRequest: data[0]
-      //     });
-      //   }
-      //   console.log(data)
-      // } catch (ex) {
-      //   console.log('Exception:', ex)
-      // }
+        let data;
+        if (response.headers.get("Content-Type").indexOf("text") >= 0) {
+          data = await response.text();
+        } else {
+          data = await response.json();
+          
+          const requests = data.map(request => {
+            return {
+              id: request._id,
+              date: request.date,
+              name: request.user.name,
+              surname: request.user.surname || "Surname",
+              avatar: request.user.avatar || "https://osclass.calinbehtuk.ro/oc-content/themes/vrisko/images/no_user.png"
+            }
+          });
+
+          this.setState({
+            requests: requests,
+            newRequest: requests[0]
+          });
+        }
+      } catch (ex) {
+        console.log('Exception:', ex)
+      }
   }
 
   showRequests(isAdmin, newRequest) {

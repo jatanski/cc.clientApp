@@ -8,6 +8,8 @@ const NewRequests = ({
   acceptRequest,
   declineRequest
 }) => {
+  const timeDiff = Date.parse(date) - Date.now();
+  const timeDays = Math.floor(timeDiff / 1000 / 60 / 60 / 24);
   return (
     <div className="card">
       <div className="card-header">
@@ -46,7 +48,10 @@ const NewRequests = ({
         </div>
       </div>
       <div className="card-footer text-center">
-        <small className="text-muted">Recieved at {date}</small><br />
+        <small className="text-muted">
+          Received
+          { timeDays < 1 ? ` today` : ` ${timeDiff} day ago`}
+          </small><br />
       </div>
     </div>
   );
