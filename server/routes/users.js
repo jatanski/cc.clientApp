@@ -14,8 +14,8 @@ router.get('/', auth, async (req, res) => {
   res.status(200).send(user);
 });
 
-router.get('/list', [auth, admin], async (req, res) => {
-    let users = await User.find({}, ['name', 'email']);
+router.get('/list', auth, async (req, res) => {
+    let users = await User.find({}, ['name', 'email', 'isAdmin']);
     if (!users) return res.status(404).send('Not a single user was found.');
     res.status(200).send(users);
 });
@@ -37,8 +37,6 @@ router.get('/deadline/:id', auth, async (req, res) => {
 
   res.status(200).send(dateLeftObject);
 });
-
-
 
 
 router.post("/", async (req, res) => {
@@ -85,13 +83,32 @@ router.post('/balance', auth, async (req, res) => {
   res.status(200).send('Added cash to account. Current balance: ' + user.balance);
 });
 
-
 router.delete("/:id", [auth, admin], async (req, res) => {
   let user = await User.findById( req.params.id );
   if (!user) return res.status(400).send("User not found.");
 
   await user.remove();
   res.send('User has been removed.');
+});
+
+router.put("/resetAdmin", auth, async (req, res) => {
+  let user = await User.findById( req.user._id );
+  if (!user) return res.status(400).send("User not found.");
+
+  let admin = await User.findOne({email: user.signedAdmin})
+  if (!admin) return res.status(400).send("Admin not found.");
+
+  user.signedAdmin = '';
+
+  const idx = admin.clients.findIndex(client => {return client._id == req.user._id });
+  if (idx === -1) return res.status(404).send('Client with the given id not found.');
+  
+  admin.clients.splice(idx, 1);
+
+  user = user.save();
+  admin = admin.save();
+
+  res.send("User's admin has been removed.");
 });
 
 

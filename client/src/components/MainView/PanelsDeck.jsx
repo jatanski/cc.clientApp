@@ -51,7 +51,8 @@ class PanelsDeck extends Component {
       // lastPayment: payment,
       requests: requests,
       newMessage: msg,
-      isAdmin: user.isAdmin
+      isAdmin: user.isAdmin,
+      signedAdmin: user.signedAdmin
     });
   }
 
@@ -59,7 +60,7 @@ class PanelsDeck extends Component {
     return (
       <div className="card-deck mx-2 my-2 text-center">
         {this.state.newMessage ? <NewMessages {...this.state.newMessage} /> : <NoNewMessages />}
-        <Requests requests={ this.state.requests } isAdmin={this.state.isAdmin}></Requests>
+        <Requests requests={ this.state.requests } isAdmin={this.state.isAdmin} signedAdmin={this.state.signedAdmin}></Requests>
         {this.state.lastPayments ? <LastPayments /> : <NoPayments />}
       </div>
     );
