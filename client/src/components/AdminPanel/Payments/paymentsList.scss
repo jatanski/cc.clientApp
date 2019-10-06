@@ -18,11 +18,12 @@
   color: white;
 }
 
-.col {
+.admin-col-payment {
+  min-width: 40%;
   display: flex;
   justify-content: center;
 }
-.col .card {
-  min-width: 15vw;
+.admin-col-payment .card {
+  min-width: 100%;
   min-height: 30vh;
 }

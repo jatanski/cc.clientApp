@@ -1,64 +1,66 @@
 import React from "react";
-import { MDBTable, MDBTableBody, MDBTableHead, MDBContainer, MDBCard, MDBRow, MDBCol, MDBCardBody, MDBIcon } from 'mdbreact';
-const ClientPaymentsView = ({users}) => {
-    // const renderCard = users.map(user => {
-    //     return (
-    //         <MDBCol key={user.name}>
-    //             <PaymentCard  user={user}></PaymentCard>
-    //         </MDBCol>
-            
-    //     );
-    // }); 
+import { MDBListGroup, MDBCardTitle, MDBCardHeader, MDBContainer, MDBCard, MDBRow, MDBCol, MDBCardBody, MDBListGroupItem, MDBNavLink } from 'mdbreact';
+const ClientPaymentsView = ({user, add, payments, deadline}) => {
+
+    function addZero(i) {
+        if (i < 10) {
+            i = "0" + i
+        };
+        return i;
+    }
+    const renderPayments = payments.map(item => {
+        var date = new Date(parseInt(item.date));
+        const day = date.getDate();
+        const month = date.getMonth()+1;
+        const year = date.getFullYear();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        return (
+            <MDBListGroupItem key={item._id}>
+                Amount: {item.amount} <br />
+                Date: {`${addZero(day)}-${addZero(month)}-${year} ${addZero(hours)}:${addZero(minutes)}:${addZero(seconds)}`}
+            </MDBListGroupItem>);
+    })
+
+    const renderButton = () => {
+        const a = true;
+        if (deadline.days === 0)
+        {
+            return ( <button 
+                onClick={add}
+                type="submit" 
+                className="btn btn-outline-success waves-effect">
+                    Pay for Subscription
+                </button>);
+        }
+        return (
+            <div>
+                <h6>Your next payment should be made in {deadline.days} days</h6>
+                <h3>Thanks for your support</h3>
+            </div>
+        );
+    }
 
     return (
         <section className="payments">
-            <MDBContainer>
+            <MDBContainer >
                 <MDBRow>
-                    <MDBCol className="center" md="6">
-                        <MDBCard>
-                            <MDBCardBody>
-                                <p className="h4 text-center py-4">List of previous payments</p>
-                                <MDBTable hover>
-                                    <MDBTableHead>
-                                        <tr>
-                                        <th>#</th>
-                                        <th>First</th>
-                                        <th>Last</th>
-                                        <th>Handle</th>
-                                        </tr>
-                                    </MDBTableHead>
-                                    <MDBTableBody>
-                                        <tr>
-                                        <td>1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                        </tr>
-                                    </MDBTableBody>
-                                </MDBTable>
-                                    <div className="text-center" >
-                                        <i  className="h1" >
-                                            <MDBIcon style={{ color: '#ff7043' }} onClick={() => console.log('see')} icon="plus" />
-                                        </i>
-                                    </div>
-                                
-                                
-                            </MDBCardBody>
-                        </MDBCard>
+                    <MDBCol key={user.name}>
+                    <MDBCard   className="mb-4">
+                        <MDBCardHeader>{user.name}</MDBCardHeader>
+                        <MDBCardBody>
+                            <MDBCardTitle>Recent payments</MDBCardTitle>
+                            <MDBListGroup>
+                                {renderPayments}
+                            </MDBListGroup>
+                            <div className="bottom-element">
+                                {renderButton()}
+                            </div>
+                        </MDBCardBody>
+                    </MDBCard>
                     </MDBCol>
-                </MDBRow>
+                </MDBRow> 
             </MDBContainer>
         </section>
   );
