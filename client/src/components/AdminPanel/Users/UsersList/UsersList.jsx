@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import UsersListView from './UsersListView';
 import baseModel from '../../../../baseModel';
 import { withRouter } from 'react-router-dom';
+import ReactDOM from 'react-dom';
 
 class UsersList extends Component {
     state = {
-        contacts: []
+        contacts: [],
+        notes: []
     }
 
     componentDidMount() {
         this.getContacts();
+        this.getNotes();
     }
 
     getContacts = async () => {
@@ -30,6 +33,33 @@ class UsersList extends Component {
                 this.setState((state, props) => {
                     return {
                         contacts: data
+                    }
+                });
+            }
+            return data;
+        } catch (ex) {
+            console.log('Exception:', ex)
+        }
+    }
+
+    getNotes = async () => {
+        try {
+            const response = await fetch(`${baseModel.baseApiUrl}notes`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...baseModel.getAuthTokenHeaderObj()
+                }
+            });
+
+            let data;
+            if (response.headers.get("Content-Type").indexOf("text") >= 0) {
+                data = await response.text();
+            } else {
+                data = await response.json();
+                this.setState((state, props) => {
+                    return {
+                        notes: data
                     }
                 });
             }
@@ -63,7 +93,6 @@ class UsersList extends Component {
                         })
                     });
             }
-            console.log(data)
             return data;
         } catch (ex) {
             console.log('Exception:', ex)
@@ -77,14 +106,41 @@ class UsersList extends Component {
         })
     }
 
+    onClientAddNoteWindow = (e) => {
+        let box = e.target.parentNode.parentNode.parentNode.children[2];
+        box.classList.toggle('hidden');
+    }
+
+    onClientAddNote = async (id, e) => {
+        let note = e.target.parentNode.children[0].value;
+        try {
+            const response = await fetch(`${baseModel.baseApiUrl}notes`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    ...baseModel.getAuthTokenHeaderObj()
+                },
+                body: {
+                    userId: id,
+                    comment: note
+                }
+            });
+            console.log(response.text());
+        } catch (ex) {
+            console.log('Exception:', ex)
+        }
+    }
+
     viewProps = {
         onDelete: this.onUserDelete,
-        onEmailClick: this.onEmailClickRedirect
+        onEmailClick: this.onEmailClickRedirect,
+        onClientAddNoteWindow: this.onClientAddNoteWindow,
+        onClientAddNote: this.onClientAddNote
     }
 
     render() {
         return (
-            <UsersListView contacts={this.state.contacts} {...this.viewProps} />
+            <UsersListView contacts={this.state.contacts} notes={this.state.notes} {...this.viewProps} />
         )
     }
 }
